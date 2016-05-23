@@ -1,10 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Balance = () => {
+const Balance = ({
+   balance
+}) => {
   return (
-    <h1>Balance</h1>
+    <h1>{balance.balance}</h1>
   );
 }
 
-export default connect()(Balance);
+const select = (state) => {
+   return {
+      balance: state.transact
+   }
+}
+
+export default connect(select)(Balance);

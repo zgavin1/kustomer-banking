@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Balance from './../components/balance';
+import Transactions from './../components/transactions';
+import Ledger from './../components/ledger';
 
 const myApp = () => {
    return (
@@ -11,6 +13,8 @@ const myApp = () => {
         </h1>
       </div>
       <Balance />
+      <Transactions />
+      <Ledger />
     </div>
    );
 };
