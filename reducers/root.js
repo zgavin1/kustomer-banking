@@ -9,6 +9,7 @@ const account = (
    state = defaultBalance,
    action
 ) => {
+   debugger
    switch (action.type) {
       case C.DEPOSIT:
          return {
