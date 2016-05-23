@@ -8,7 +8,6 @@ const transact = (
    state = defaultBalance,
    action
 ) => {
-   debugger
    switch (action.type) {
       case "DEPOSIT":
          return {
