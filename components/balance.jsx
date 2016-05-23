@@ -2,20 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Balance = ({
-   balance
+   account
 }) => {
    let colorClass;
-   if (balance.balance < 0) {
+   if (account.balance < 0) {
       colorClass = "red";
    }
    return (
-      <h1 className={"ui header " + colorClass}>$ {balance.balance}</h1>
+      <h1 className={"ui header " + colorClass}>$ {account.balance}</h1>
    );
 }
 
 const select = (state) => {
    return {
-      balance: state.transact
+      account: state.account
    }
 }
 

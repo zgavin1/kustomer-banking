@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 
-const ledger = ({
+const Ledger = ({
    rows
 }) => {
    const ledgerRows = rows.map((row)=>{
@@ -13,7 +13,7 @@ const ledger = ({
             <td className="ui right aligned">{row.date}</td>
          </tr>
       );
-   });
+   }).reverse();
 
    return (
       <div className="ui container">
@@ -88,4 +88,4 @@ const select = (state) => {
    }
 }
 
-export default connect(select)(ledger);
+export default connect(select)(Ledger);

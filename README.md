@@ -12,12 +12,12 @@ OR
 
 <!-- TODO -->
 
-add error handling
-improve ledger, remove footer maybe, add scroll after X transaction instead of expanding(bonus)
-improve buttons
+-add error handling
+-improve ledger, remove footer maybe, add scroll after X transaction instead of expanding(bonus)
+-improve buttons
+-format money
 
 
 NEXT>>>
-add actions and constants and
 
 TESTS 

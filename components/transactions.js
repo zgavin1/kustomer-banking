@@ -1,21 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import actions from './../actions/actionCreators.js'
 
-// SHOULD GO IN ACTIONS DIRECTORY
-let depositId = 0;
-const makeDeposit = (amount, balance) => {
-   amount = parseFloat(amount);
-   return {
-      type: "DEPOSIT",
-      id: depositId++,
-      amount: amount,
-      newBalance: amount + balance,
-      date: new Date().toDateString()
-   };
-}
+// // SHOULD GO IN UTIL DIRECTORY
+// let depositId = 0;
+// const makeDeposit = (amount, balance) => {
+//    amount = parseFloat(amount);
+//    return {
+//       type: "DEPOSIT",
+//       id: depositId++,
+//       amount: amount,
+//       newBalance: amount + balance,
+//       date: new Date().toDateString()
+//    };
+// }
 
-const transactions = ({
-   transact,
+const Transactions = ({
+   account,
    dispatch
 }) => {
    let depositAmount;
@@ -27,7 +28,7 @@ const transactions = ({
             onClick={e=>{
                e.preventDefault();
                if (!depositAmount.value) return;
-               dispatch(makeDeposit(depositAmount.value, transact.balance));
+               dispatch(actions.deposit(depositAmount.value, account.balance));
                depositAmount.value = "";
             }} >
              DEPOSIT
@@ -45,22 +46,8 @@ const transactions = ({
 
 const select = (state) => {
    return {
-      transact: state.transact
+      account: state.account
    };
 };
 
-// const makeDeposit = (prevBalance, amt) => {
-//    return prevBalance + amt;
-// }
-
-// const mapDispatchToTransactionsProps = (dispatch) => {
-//    return {
-//       dispatch: (action) => {
-//          dispatch(action)
-//       }
-//    };  
-// };
-
-
-
-export default connect(select)(transactions);
+export default connect(select)(Transactions);

@@ -1,31 +1,23 @@
 import { combineReducers } from 'redux';
+import C from './../constants';
 
 const defaultBalance = {
    balance: 0
 }
 
-const transact = (
+const account = (
    state = defaultBalance,
    action
 ) => {
    switch (action.type) {
-      case "DEPOSIT":
+      case C.DEPOSIT:
          return {
             ...state,
-            balance: action.newBalance
+            balance: action.transaction.balance
          }
       default:
          return state;
    }
-}
-
-const addRow = (action) => {
-   return {
-      id: action.id,
-      amount: action.amount,
-      balance: action.newBalance,
-      date: action.date
-   };
 }
 
 const ledger = (
@@ -33,11 +25,10 @@ const ledger = (
    action
 ) => {
    switch (action.type) {
-      // case "ADD_ROW":
-      case "DEPOSIT":
+      case C.DEPOSIT:
          return [
             ...state,
-            addRow(action)
+            action.transaction
          ];
       default:
          return state;
@@ -46,6 +37,6 @@ const ledger = (
 
 
 export default combineReducers({
-   transact,
+   account,
    ledger
 });
