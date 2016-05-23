@@ -8,7 +8,6 @@ const Balance = ({
    if (balance.balance < 0) {
       colorClass = "red";
    }
-
    return (
       <h1 className={"ui header " + colorClass}>$ {balance.balance}</h1>
    );

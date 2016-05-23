@@ -1,9 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+// SHOULD GO IN ACTIONS DIRECTORY
+let depositId = 0;
+const makeDeposit = (amount, balance) => {
+   amount = parseFloat(amount);
+   return {
+      type: "DEPOSIT",
+      id: depositId++,
+      amount: amount,
+      newBalance: amount + balance,
+      date: new Date().toDateString()
+   };
+}
+
 const transactions = ({
    transact,
-   onClick
+   dispatch
 }) => {
    let depositAmount;
 
@@ -12,9 +25,9 @@ const transactions = ({
          <div className="ui left action input">
          <button className="ui teal labeled icon button"
             onClick={e=>{
-               if (!depositAmount.value) return;
                e.preventDefault();
-               onClick(parseFloat(depositAmount.value) + transact.balance);
+               if (!depositAmount.value) return;
+               dispatch(makeDeposit(depositAmount.value, transact.balance));
                depositAmount.value = "";
             }} >
              DEPOSIT
@@ -29,7 +42,7 @@ const transactions = ({
          // <button>Withdraw</button>
 }
 
-const mapStateToTransactionsProps = (state) => {
+const select = (state) => {
    return {
       transact: state.transact
    };
@@ -39,14 +52,14 @@ const mapStateToTransactionsProps = (state) => {
 //    return prevBalance + amt;
 // }
 
-const mapDispatchToTransactionsProps = (dispatch) => {
-   return {
-      onClick: (amt) => {
-         dispatch({type: "DEPOSIT", newBalance: amt})
-      }
-   };  
-};
+// const mapDispatchToTransactionsProps = (dispatch) => {
+//    return {
+//       dispatch: (action) => {
+//          dispatch(action)
+//       }
+//    };  
+// };
 
 
 
-export default connect(mapStateToTransactionsProps, mapDispatchToTransactionsProps)(transactions);
+export default connect(select)(transactions);
