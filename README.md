@@ -8,3 +8,16 @@ OR
 - run `webpack` to transpile the es6 syntax and build the code in a bundle.js file
 
 - open the file "index.js" in your browser
+
+
+<!-- TODO -->
+
+add error handling
+improve ledger, remove footer maybe, add scroll after X transaction instead of expanding(bonus)
+improve buttons
+
+
+NEXT>>>
+add actions and constants and
+
+TESTS 

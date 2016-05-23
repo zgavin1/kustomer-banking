@@ -8,9 +8,9 @@ const ledger = ({
    const ledgerRows = rows.map((row)=>{
       return (
          <tr key={row.id}>
-            <td>{row.amount}</td>
-            <td>{row.balance}</td>
-            <td>{row.date}</td>
+            <td className="ui right aligned">{row.amount}</td>
+            <td className="ui right aligned">{row.balance}</td>
+            <td className="ui right aligned">{row.date}</td>
          </tr>
       );
    });
@@ -19,9 +19,9 @@ const ledger = ({
       <div className="ui container">
          <table className="ui celled table">
             <thead>
-               <tr><th>Amount</th>
-               <th>Balance</th>
-               <th>Date</th>
+               <tr><th className="ui right aligned">Amount</th>
+               <th className="ui right aligned">Balance</th>
+               <th className="ui right aligned">Date</th>
             </tr></thead>
             <tbody>
                {ledgerRows}
