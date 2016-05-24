@@ -39,7 +39,7 @@ const Ledger = ({
 const select = (state) => {
    return {
       rows: state.ledger
-   }
+   };
 }
 
 export default connect(select)(Ledger);
