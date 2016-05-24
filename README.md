@@ -13,7 +13,9 @@ OR
 
 <!-- TODO -->
 handle bad input
-fix issue with deposits just concatenating on balance
-improve styling
+
+format input
+
+animations
 
 BIG (undo)
