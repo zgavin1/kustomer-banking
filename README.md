@@ -1,3 +1,4 @@
+#Banking App
 To run: 
 - in your browser, navigate to http://zach-gavin.com/kustomer-banking
 
@@ -11,13 +12,3 @@ OR
 
 
 <!-- TODO -->
-
--add error handling
--improve ledger, remove footer maybe, add scroll after X transaction instead of expanding(bonus)
--improve buttons
--format money
-
-
-NEXT>>>
-
-TESTS 

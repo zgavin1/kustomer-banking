@@ -2,17 +2,28 @@ import C from './../constants';
 
 let depositId = 0;
 
-export default {
-   makeDeposit:(amount, currentBalance) => {
+const utils = {
+   makeTransaction: (amount, newBalance, type) => {
       amount = parseFloat(amount);
       return {
-         type: C.DEPOSIT,
+         type: type,
          transaction: {
             id: depositId++,
             amount: amount,
-            balance: amount + currentBalance,
+            balance: newBalance,
             date: new Date().toDateString()
          }
       };
-   }
+   },
+
+   makeDeposit: (amount, currentBalance) => {
+      debugger
+      return utils.makeTransaction(amount, currentBalance + amount, C.DEPOSIT);
+   },
+
+   makeWithdrawal: (amount, currentBalance) => {
+      return utils.makeTransaction(amount, currentBalance - amount, C.WITHDRAW);
+   } 
 }
+
+export default utils

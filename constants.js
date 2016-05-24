@@ -1,3 +1,4 @@
 export default {
-   DEPOSIT: "DEPOSIT"
+   DEPOSIT: "DEPOSIT",
+   WITHDRAW: "WITHDRAW"
 }
