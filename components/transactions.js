@@ -32,11 +32,18 @@ const Transactions = ({
             <div className="ui right labeled input">
                <div className="ui label">$</div>
                <input
-                  type="text"
-                  placeholder="0"
+                  type: 'number',
+                  min: '0',
+                  placeholder: '0',
+                  onKeyPress: function onKeyPress(key) {
+                     if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
+                        key.preventDefault();
+                     }
+                  }
                   ref={node=>{
                      transAmount=node;
                   }} />
+
                <div className="ui basic label">.</div>
             </div>
          </div>

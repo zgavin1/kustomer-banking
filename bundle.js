@@ -60,7 +60,7 @@
 	
 	var _appContainer2 = _interopRequireDefault(_appContainer);
 	
-	var _root = __webpack_require__(185);
+	var _root = __webpack_require__(188);
 	
 	var _root2 = _interopRequireDefault(_root);
 	
@@ -21244,11 +21244,11 @@
 	
 	var _balance2 = _interopRequireDefault(_balance);
 	
-	var _transactions = __webpack_require__(183);
+	var _transactions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./../components/transactions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _transactions2 = _interopRequireDefault(_transactions);
 	
-	var _ledger = __webpack_require__(184);
+	var _ledger = __webpack_require__(187);
 	
 	var _ledger2 = _interopRequireDefault(_ledger);
 	
@@ -21317,95 +21317,24 @@
 	exports.default = (0, _reactRedux.connect)(select)(Balance);
 
 /***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
+/* 183 */,
+/* 184 */,
+/* 185 */
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	   value: true
 	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(158);
-	
-	var _actionCreators = __webpack_require__(187);
-	
-	var _actionCreators2 = _interopRequireDefault(_actionCreators);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Transactions = function Transactions(_ref) {
-	   var account = _ref.account;
-	   var dispatch = _ref.dispatch;
-	
-	   var transAmount = void 0;
-	
-	   return _react2.default.createElement(
-	      'div',
-	      { className: 'ui container' },
-	      _react2.default.createElement(
-	         'div',
-	         { className: 'ui left action input' },
-	         _react2.default.createElement(
-	            'button',
-	            { className: 'ui teal labeled icon button',
-	               onClick: function onClick(e) {
-	                  e.preventDefault();
-	                  if (!transAmount.value || transAmount.value === "0") rer;
-	                  dispatch(_actionCreators2.default.deposit(transAmount.value, account.balance));
-	                  transAmount.value = "";
-	               } },
-	            'DEPOSIT'
-	         ),
-	         _react2.default.createElement(
-	            'button',
-	            { className: 'ui teal labeled icon button',
-	               onClick: function onClick(e) {
-	                  e.preventDefault();
-	                  if (!transAmount.value || transAmount.value === "0") return;
-	                  dispatch(_actionCreators2.default.withdraw(transAmount.value, account.balance));
-	                  transAmount.value = "";
-	               } },
-	            'WITHDRAW'
-	         ),
-	         _react2.default.createElement(
-	            'div',
-	            { className: 'ui right labeled input' },
-	            _react2.default.createElement(
-	               'div',
-	               { className: 'ui label' },
-	               '$'
-	            ),
-	            _react2.default.createElement('input', {
-	               type: 'text',
-	               placeholder: '0',
-	               ref: function ref(node) {
-	                  transAmount = node;
-	               } }),
-	            _react2.default.createElement(
-	               'div',
-	               { className: 'ui basic label' },
-	               '.'
-	            )
-	         )
-	      )
-	   );
+	exports.default = {
+	   DEPOSIT: "DEPOSIT",
+	   WITHDRAW: "WITHDRAW"
 	};
-	
-	var select = function select(state) {
-	   return {
-	      account: state.account
-	   };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(select)(Transactions);
 
 /***/ },
-/* 184 */
+/* 186 */,
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21505,7 +21434,7 @@
 	exports.default = (0, _reactRedux.connect)(select)(Ledger);
 
 /***/ },
-/* 185 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21518,7 +21447,7 @@
 	
 	var _redux = __webpack_require__(165);
 	
-	var _constants = __webpack_require__(186);
+	var _constants = __webpack_require__(185);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -21566,93 +21495,6 @@
 	   account: account,
 	   ledger: ledger
 	});
-
-/***/ },
-/* 186 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	exports.default = {
-	   DEPOSIT: "DEPOSIT",
-	   WITHDRAW: "WITHDRAW"
-	};
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	
-	var _constants = __webpack_require__(186);
-	
-	var _constants2 = _interopRequireDefault(_constants);
-	
-	var _bankingUtils = __webpack_require__(188);
-	
-	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	   deposit: function deposit(amount, prevBalance) {
-	      return _bankingUtils2.default.makeDeposit(amount, prevBalance);
-	   },
-	   withdraw: function withdraw(amount, prevBalance) {
-	      return _bankingUtils2.default.makeWithdrawal(amount, prevBalance);
-	   }
-	};
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	
-	var _constants = __webpack_require__(186);
-	
-	var _constants2 = _interopRequireDefault(_constants);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var depositId = 0;
-	
-	var utils = {
-	   makeTransaction: function makeTransaction(amount, newBalance, type) {
-	      return {
-	         type: type,
-	         transaction: {
-	            id: depositId++,
-	            amount: amount,
-	            balance: newBalance,
-	            date: new Date().toDateString()
-	         }
-	      };
-	   },
-	
-	   makeDeposit: function makeDeposit(amount, currentBalance) {
-	      amount = parseFloat(amount);
-	      return utils.makeTransaction(amount, currentBalance + amount, _constants2.default.DEPOSIT);
-	   },
-	
-	   makeWithdrawal: function makeWithdrawal(amount, currentBalance) {
-	      amount = parseFloat(amount);
-	      return utils.makeTransaction(amount, currentBalance - amount, _constants2.default.WITHDRAW);
-	   }
-	};
-	
-	exports.default = utils;
 
 /***/ }
 /******/ ]);
