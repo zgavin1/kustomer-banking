@@ -38,36 +38,6 @@ const Transactions = ({
                }} >
                 WITHDRAW
             </button>
-<<<<<<< HEAD
-            <div className="ui right labeled input">
-               <div className="ui label">$</div>
-               <input
-                  type="number"
-                  min="0"
-                  placeholder="0"
-                  onKeyPress={key=>{
-                     if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
-                        key.preventDefault();
-                     }
-                  }}
-                  ref={node=>{
-                     transAmount=node;
-                  }} />
-               <div className="ui basic label">.</div>
-            </div>
-||||||| merged common ancestors
-            <div className="ui right labeled input">
-               <div className="ui label">$</div>
-               <input
-                  type="text"
-                  placeholder="0"
-                  ref={node=>{
-                     transAmount=node;
-                  }} />
-               <div className="ui basic label">.</div>
-            </div>
-=======
->>>>>>> master
          </div>
       </div>
    );
