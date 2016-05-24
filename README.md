@@ -12,8 +12,12 @@ OR
 
 
 <!-- TODO -->
-handle bad input
-fix issue with deposits just concatenating on balance
+handle bad input (letters, negatives)
+
 improve styling
+
+animations (for adding rows)
+
+sorting/filtering
 
 BIG (undo)
