@@ -8,8 +8,8 @@ const Ledger = ({
    const ledgerRows = rows.map((row)=>{
       return (
          <tr key={row.id}>
-            <td className="ui right aligned">{row.amount}</td>
-            <td className="ui right aligned">{row.balance}</td>
+            <td className="ui right aligned">${row.amount}</td>
+            <td className="ui right aligned">${row.balance}</td>
             <td className="ui right aligned">{row.date}</td>
          </tr>
       );

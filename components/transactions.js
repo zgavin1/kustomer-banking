@@ -14,7 +14,7 @@ const Transactions = ({
             <button className="ui teal labeled icon button"
                onClick={e=>{
                   e.preventDefault();
-                  if (!transAmount.value) return;
+                  if (!transAmount.value || transAmount.value === "0") return;
                   dispatch(actions.deposit(transAmount.value, account.balance));
                   transAmount.value = "";
                }} >
@@ -23,7 +23,7 @@ const Transactions = ({
             <button className="ui teal labeled icon button"
                onClick={e=>{
                   e.preventDefault();
-                  if (!transAmount.value) return;
+                  if (!transAmount.value || transAmount.value === "0") return;
                   dispatch(actions.withdraw(transAmount.value, account.balance));
                   transAmount.value = "";
                }} >
