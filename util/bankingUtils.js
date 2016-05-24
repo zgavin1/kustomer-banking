@@ -4,7 +4,6 @@ let depositId = 0;
 
 const utils = {
    makeTransaction: (amount, newBalance, type) => {
-      amount = parseFloat(amount);
       return {
          type: type,
          transaction: {
@@ -17,11 +16,12 @@ const utils = {
    },
 
    makeDeposit: (amount, currentBalance) => {
-      debugger
+      amount = parseFloat(amount)
       return utils.makeTransaction(amount, currentBalance + amount, C.DEPOSIT);
    },
 
    makeWithdrawal: (amount, currentBalance) => {
+      amount = parseFloat(amount);
       return utils.makeTransaction(amount, currentBalance - amount, C.WITHDRAW);
    } 
 }

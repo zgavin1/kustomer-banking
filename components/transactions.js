@@ -6,7 +6,7 @@ const Transactions = ({
    account,
    dispatch
 }) => {
-   let depositAmount;
+   let transAmount;
 
    return (
       <div className="ui container">
@@ -14,21 +14,28 @@ const Transactions = ({
          <button className="ui teal labeled icon button"
             onClick={e=>{
                e.preventDefault();
-               if (!depositAmount.value) return;
-               dispatch(actions.deposit(depositAmount.value, account.balance));
-               depositAmount.value = "";
+               if (!transAmount.value) return;
+               dispatch(actions.deposit(transAmount.value, account.balance));
+               transAmount.value = "";
             }} >
              DEPOSIT
          </button>
+         <button className="ui teal labeled icon button"
+            onClick={e=>{
+               e.preventDefault();
+               if (!transAmount.value) return;
+               dispatch(actions.withdraw(transAmount.value, account.balance));
+               transAmount.value = "";
+            }} >
+             WITHDRAW
+         </button>
          <input type="text"
             ref={node=>{
-               depositAmount=node;
+               transAmount=node;
             }} />
          </div>
       </div>
    );
-   // STILL NEED WITHDRAW
-         // <button>Withdraw</button>
 }
 
 const select = (state) => {
