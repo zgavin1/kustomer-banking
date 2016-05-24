@@ -60,7 +60,7 @@
 	
 	var _appContainer2 = _interopRequireDefault(_appContainer);
 	
-	var _root = __webpack_require__(189);
+	var _root = __webpack_require__(185);
 	
 	var _root2 = _interopRequireDefault(_root);
 	
@@ -21248,7 +21248,7 @@
 	
 	var _transactions2 = _interopRequireDefault(_transactions);
 	
-	var _ledger = __webpack_require__(188);
+	var _ledger = __webpack_require__(184);
 	
 	var _ledger2 = _interopRequireDefault(_ledger);
 	
@@ -21335,11 +21335,11 @@
 	
 	var _reactRedux = __webpack_require__(158);
 	
-	var _actionCreators = __webpack_require__(184);
+	var _actionCreators = __webpack_require__(187);
 	
 	var _actionCreators2 = _interopRequireDefault(_actionCreators);
 	
-	var _input = __webpack_require__(187);
+	var _input = __webpack_require__(189);
 	
 	var _input2 = _interopRequireDefault(_input);
 	
@@ -21372,7 +21372,11 @@
 	               '.'
 	            ),
 	            _react2.default.createElement(_input2.default, { cents: true })
-	         ),
+	         )
+	      ),
+	      _react2.default.createElement(
+	         'div',
+	         { className: 'ui container' },
 	         _react2.default.createElement(
 	            'button',
 	            { className: 'ui teal labeled icon button',
@@ -21417,141 +21421,6 @@
 	   value: true
 	});
 	
-	var _constants = __webpack_require__(185);
-	
-	var _constants2 = _interopRequireDefault(_constants);
-	
-	var _bankingUtils = __webpack_require__(186);
-	
-	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	   deposit: function deposit(amount, prevBalance) {
-	      return _bankingUtils2.default.makeDeposit(amount, prevBalance);
-	   },
-	   withdraw: function withdraw(amount, prevBalance) {
-	      return _bankingUtils2.default.makeWithdrawal(amount, prevBalance);
-	   }
-	};
-
-/***/ },
-/* 185 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	exports.default = {
-	   DEPOSIT: "DEPOSIT",
-	   WITHDRAW: "WITHDRAW"
-	};
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	
-	var _constants = __webpack_require__(185);
-	
-	var _constants2 = _interopRequireDefault(_constants);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var depositId = 0;
-	
-	var utils = {
-	   makeTransaction: function makeTransaction(amount, newBalance, type) {
-	      return {
-	         type: type,
-	         transaction: {
-	            id: depositId++,
-	            amount: amount,
-	            balance: newBalance,
-	            date: new Date().toDateString()
-	         }
-	      };
-	   },
-	
-	   makeDeposit: function makeDeposit(amount, currentBalance) {
-	      amount = parseFloat(amount);
-	      return utils.makeTransaction(amount, currentBalance + amount, _constants2.default.DEPOSIT);
-	   },
-	
-	   makeWithdrawal: function makeWithdrawal(amount, currentBalance) {
-	      amount = parseFloat(amount);
-	      return utils.makeTransaction(amount, currentBalance - amount, _constants2.default.WITHDRAW);
-	   }
-	};
-	
-	exports.default = utils;
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(158);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Input = _react2.default.createClass({
-	   displayName: 'Input',
-	
-	   render: function render() {
-	      var _this = this;
-	
-	      var transAmount = void 0;
-	      var cents = this.props.cents;
-	
-	      return _react2.default.createElement('input', {
-	         type: 'number',
-	         min: '0',
-	         max: cents ? "99" : "",
-	         placeholder: cents ? "00" : "0",
-	         onKeyPress: function onKeyPress(key) {
-	            if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
-	               key.preventDefault();
-	            } else if (key.charCode === 48 && transAmount.value.length === 0) {
-	               key.preventDefault();
-	            }
-	            if (_this.props.cents && key.target.value.length === 2) key.preventDefault();
-	         },
-	         ref: function ref(node) {
-	            transAmount = node;
-	         } });
-	   }
-	});
-	
-	exports.default = (0, _reactRedux.connect)()(Input);
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -21586,6 +21455,28 @@
 	         )
 	      );
 	   }).reverse();
+	
+	   if (rows.length === 0) {
+	      ledgerRows = _react2.default.createElement(
+	         'tr',
+	         { key: '0' },
+	         _react2.default.createElement(
+	            'td',
+	            { className: 'ui right aligned' },
+	            'None'
+	         ),
+	         _react2.default.createElement(
+	            'td',
+	            { className: 'ui right aligned' },
+	            'None'
+	         ),
+	         _react2.default.createElement(
+	            'td',
+	            { className: 'ui right aligned' },
+	            'None'
+	         )
+	      );
+	   }
 	
 	   return _react2.default.createElement(
 	      'div',
@@ -21643,7 +21534,7 @@
 	exports.default = (0, _reactRedux.connect)(select)(Ledger);
 
 /***/ },
-/* 189 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21656,7 +21547,7 @@
 	
 	var _redux = __webpack_require__(165);
 	
-	var _constants = __webpack_require__(185);
+	var _constants = __webpack_require__(186);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -21704,6 +21595,141 @@
 	   account: account,
 	   ledger: ledger
 	});
+
+/***/ },
+/* 186 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	exports.default = {
+	   DEPOSIT: "DEPOSIT",
+	   WITHDRAW: "WITHDRAW"
+	};
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _constants = __webpack_require__(186);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	var _bankingUtils = __webpack_require__(188);
+	
+	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	   deposit: function deposit(amount, prevBalance) {
+	      return _bankingUtils2.default.makeDeposit(amount, prevBalance);
+	   },
+	   withdraw: function withdraw(amount, prevBalance) {
+	      return _bankingUtils2.default.makeWithdrawal(amount, prevBalance);
+	   }
+	};
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _constants = __webpack_require__(186);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var depositId = 0;
+	
+	var utils = {
+	   makeTransaction: function makeTransaction(amount, newBalance, type) {
+	      return {
+	         type: type,
+	         transaction: {
+	            id: depositId++,
+	            amount: amount,
+	            balance: newBalance,
+	            date: new Date().toDateString()
+	         }
+	      };
+	   },
+	
+	   makeDeposit: function makeDeposit(amount, currentBalance) {
+	      amount = parseFloat(amount);
+	      return utils.makeTransaction(amount, currentBalance + amount, _constants2.default.DEPOSIT);
+	   },
+	
+	   makeWithdrawal: function makeWithdrawal(amount, currentBalance) {
+	      amount = parseFloat(amount);
+	      return utils.makeTransaction(amount, currentBalance - amount, _constants2.default.WITHDRAW);
+	   }
+	};
+	
+	exports.default = utils;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Input = _react2.default.createClass({
+	   displayName: 'Input',
+	
+	   render: function render() {
+	      var _this = this;
+	
+	      var transAmount = void 0;
+	      var cents = this.props.cents;
+	
+	      return _react2.default.createElement('input', {
+	         type: 'number',
+	         min: '0',
+	         max: cents ? "99" : "",
+	         placeholder: cents ? "00" : "0",
+	         onKeyPress: function onKeyPress(key) {
+	            if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
+	               key.preventDefault();
+	            } else if (key.charCode === 48 && transAmount.value.length === 0) {
+	               key.preventDefault();
+	            }
+	            if (_this.props.cents && key.target.value.length === 2) key.preventDefault();
+	         },
+	         ref: function ref(node) {
+	            transAmount = node;
+	         } });
+	   }
+	});
+	
+	exports.default = (0, _reactRedux.connect)()(Input);
 
 /***/ }
 /******/ ]);

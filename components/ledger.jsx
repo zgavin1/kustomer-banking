@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 const Ledger = ({
    rows
 }) => {
-   const ledgerRows = rows.map((row)=>{
+   let ledgerRows = rows.map((row)=>{
       return (
          <tr key={row.id}>
             <td className="ui right aligned">${row.amount}</td>
@@ -14,6 +14,16 @@ const Ledger = ({
          </tr>
       );
    }).reverse();
+
+   if (rows.length === 0) {
+      ledgerRows = (
+         <tr key="0">
+            <td className="ui right aligned">None</td>
+            <td className="ui right aligned">None</td>
+            <td className="ui right aligned">None</td>
+         </tr>
+      );
+   }
 
    return (
       <div className="ui container">

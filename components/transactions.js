@@ -18,6 +18,8 @@ const Transactions = ({
                <strong className="ui label">.</strong>
                <Input cents={true} />
             </div>
+         </div>
+         <div className="ui container">
             <button className="ui teal labeled icon button"
                onClick={e=>{
                   e.preventDefault();
