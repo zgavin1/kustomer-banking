@@ -11,7 +11,7 @@ describe('account reducer', () => {
          });
    });
 
-   it('should update from the default', () => {
+   it('should update from the default on transactions', () => {
       const testAction = {
          type: C.DEPOSIT,
          transaction: {
@@ -35,4 +35,29 @@ describe('account reducer', () => {
             ]
          });
    });
+
+   it('can handle negatives', () => {
+      const testWithdrawal = {
+         type: C.WITHDRAW,
+         transaction: {
+            amount: 5,
+            balance: -5,
+            id: 10,
+            date: "Monday"
+         }
+      };
+
+      expect(reducer(undefined, testWithdrawal))
+         .toEqual({
+            account: {balance: -5},
+            ledger: [
+               {
+                  amount: 5,
+                  balance: -5,
+                  id: 10,
+                  date: "Monday"
+               }
+            ]
+         });
+   })
 });

@@ -15,6 +15,11 @@ const account = (
             ...state,
             balance: action.transaction.balance
          }
+      case C.WITHDRAW:
+         return {
+            ...state,
+            balance: action.transaction.balance
+         }
       default:
          return state;
    }
@@ -26,6 +31,11 @@ const ledger = (
 ) => {
    switch (action.type) {
       case C.DEPOSIT:
+         return [
+            ...state,
+            action.transaction
+         ];
+      case C.WITHDRAW:
          return [
             ...state,
             action.transaction
