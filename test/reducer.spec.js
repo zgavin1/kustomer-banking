@@ -12,25 +12,30 @@ describe('account reducer', () => {
    });
 
    it('should update from the default on transactions', () => {
+      const amount = Math.floor(Math.random() * 100),
+         balance = Math.floor(Math.random() * 100),
+         id = Math.floor(Math.random() * 10),
+         date = new Date(Math.floor(Math.random() * Date.now()));
+
       const testAction = {
          type: C.DEPOSIT,
          transaction: {
-            amount: 10,
-            balance: 10,
-            id: 10,
-            date: "Monday"
+            amount: amount,
+            balance: balance,
+            id: id,
+            date: date
          }
       };
 
       expect(reducer(undefined, testAction))
          .toEqual({
-            account: {balance: 10},
+            account: {balance: balance},
             ledger: [
                {
-                  amount: 10,
-                  balance: 10,
-                  id: 10,
-                  date: "Monday"
+                  amount: amount,
+                  balance: balance,
+                  id: id,
+                  date: date
                }
             ]
          });
