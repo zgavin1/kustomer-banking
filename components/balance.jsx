@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 const Balance = React.createClass ({
 
    determineColor: function() {
-      if (this.props.account.balance < 0) {
-         return "red";
-      }
+      return this.props.account.balance < 0 ? "red":"";
    },
 
    render: function () {
       return (
-         <h1 className={"ui header " + this.determineColor()}>$ {this.props.account.balance}</h1>
+         <h1 className={"ui balance-display " + this.determineColor()}>$ {this.props.account.balance}</h1>
       );
    }
 });

@@ -1,0 +1,15 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.masthead {
+   padding-top: .5em; 
+}
+
+.balance-display {
+   font-size: 5em;
+   padding: 1em 0;
+   margin: 0 auto;
+}

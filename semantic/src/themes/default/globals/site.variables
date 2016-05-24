@@ -60,7 +60,7 @@
 @headerFontWeight : bold;
 @headerLineHeight : 1.2857em;
 
-@h1 : 2rem;
+@h1 : 3rem;
 @h2 : 1.714rem;
 @h3 : 1.28rem;
 @h4 : 1.071rem;

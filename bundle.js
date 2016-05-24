@@ -60,7 +60,7 @@
 	
 	var _appContainer2 = _interopRequireDefault(_appContainer);
 	
-	var _root = __webpack_require__(188);
+	var _root = __webpack_require__(189);
 	
 	var _root2 = _interopRequireDefault(_root);
 	
@@ -21248,7 +21248,7 @@
 	
 	var _transactions2 = _interopRequireDefault(_transactions);
 	
-	var _ledger = __webpack_require__(187);
+	var _ledger = __webpack_require__(188);
 	
 	var _ledger2 = _interopRequireDefault(_ledger);
 	
@@ -21263,7 +21263,7 @@
 	      { className: 'ui container center aligned' },
 	      _react2.default.createElement(
 	        'h1',
-	        { className: 'ui header' },
+	        { className: 'ui masthead' },
 	        'Banking App'
 	      )
 	    ),
@@ -21298,15 +21298,13 @@
 	
 	
 	   determineColor: function determineColor() {
-	      if (this.props.account.balance < 0) {
-	         return "red";
-	      }
+	      return this.props.account.balance < 0 ? "red" : "";
 	   },
 	
 	   render: function render() {
 	      return _react2.default.createElement(
 	         'h1',
-	         { className: "ui header " + this.determineColor() },
+	         { className: "ui balance-display " + this.determineColor() },
 	         '$ ',
 	         this.props.account.balance
 	      );
@@ -21341,7 +21339,7 @@
 	
 	var _actionCreators2 = _interopRequireDefault(_actionCreators);
 	
-	var _input = __webpack_require__(189);
+	var _input = __webpack_require__(187);
 	
 	var _input2 = _interopRequireDefault(_input);
 	
@@ -21359,6 +21357,22 @@
 	      _react2.default.createElement(
 	         'div',
 	         { className: 'ui left action input' },
+	         _react2.default.createElement(
+	            'div',
+	            { className: 'ui left labeled input' },
+	            _react2.default.createElement(
+	               'div',
+	               { className: 'ui label' },
+	               '$'
+	            ),
+	            _react2.default.createElement(_input2.default, { cents: false }),
+	            _react2.default.createElement(
+	               'strong',
+	               { className: 'ui label' },
+	               '.'
+	            ),
+	            _react2.default.createElement(_input2.default, { cents: true })
+	         ),
 	         _react2.default.createElement(
 	            'button',
 	            { className: 'ui teal labeled icon button',
@@ -21380,21 +21394,6 @@
 	                  transAmount.value = "";
 	               } },
 	            'WITHDRAW'
-	         ),
-	         _react2.default.createElement(
-	            'div',
-	            { className: 'ui right labeled input' },
-	            _react2.default.createElement(
-	               'div',
-	               { className: 'ui label' },
-	               '$'
-	            ),
-	            _react2.default.createElement(_input2.default, { cents: true }),
-	            _react2.default.createElement(
-	               'div',
-	               { className: 'ui basic label' },
-	               '.'
-	            )
 	         )
 	      )
 	   );
@@ -21513,6 +21512,54 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var Input = _react2.default.createClass({
+	   displayName: 'Input',
+	
+	   render: function render() {
+	      var _this = this;
+	
+	      var transAmount = void 0;
+	      var cents = this.props.cents;
+	
+	      return _react2.default.createElement('input', {
+	         type: 'number',
+	         min: '0',
+	         max: cents ? "99" : "",
+	         placeholder: cents ? "00" : "0",
+	         onKeyPress: function onKeyPress(key) {
+	            if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
+	               key.preventDefault();
+	            } else if (key.charCode === 48 && transAmount.value.length === 0) {
+	               key.preventDefault();
+	            }
+	            if (_this.props.cents && key.target.value.length === 2) key.preventDefault();
+	         },
+	         ref: function ref(node) {
+	            transAmount = node;
+	         } });
+	   }
+	});
+	
+	exports.default = (0, _reactRedux.connect)()(Input);
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	var Ledger = function Ledger(_ref) {
 	   var rows = _ref.rows;
 	
@@ -21596,7 +21643,7 @@
 	exports.default = (0, _reactRedux.connect)(select)(Ledger);
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21657,54 +21704,6 @@
 	   account: account,
 	   ledger: ledger
 	});
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(158);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Input = _react2.default.createClass({
-	   displayName: 'Input',
-	
-	   render: function render() {
-	      var _this = this;
-	
-	      var transAmount = void 0;
-	      var cents = this.props.cents;
-	
-	      return _react2.default.createElement('input', {
-	         type: 'number',
-	         min: '0',
-	         max: cents ? "99" : "",
-	         placeholder: cents ? "00" : "0",
-	         onKeyPress: function onKeyPress(key) {
-	            if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
-	               key.preventDefault();
-	            } else if (key.charCode === 48 && transAmount.value.length === 0) {
-	               key.preventDefault();
-	            }
-	            if (_this.props.cents && key.target.value.length === 2) key.preventDefault();
-	         },
-	         ref: function ref(node) {
-	            transAmount = node;
-	         } });
-	   }
-	});
-	
-	exports.default = (0, _reactRedux.connect)()(Input);
 
 /***/ }
 /******/ ]);

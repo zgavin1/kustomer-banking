@@ -12,6 +12,12 @@ const Transactions = ({
    return (
       <div className="ui container">
          <div className="ui left action input">
+            <div className="ui left labeled input">
+               <div className="ui label">$</div>
+               <Input cents={false} />
+               <strong className="ui label">.</strong>
+               <Input cents={true} />
+            </div>
             <button className="ui teal labeled icon button"
                onClick={e=>{
                   e.preventDefault();
@@ -30,12 +36,6 @@ const Transactions = ({
                }} >
                 WITHDRAW
             </button>
-            <div className="ui right labeled input">
-               <div className="ui label">$</div>
-               <Input cents={true} />
-
-               <div className="ui basic label">.</div>
-            </div>
          </div>
       </div>
    );
