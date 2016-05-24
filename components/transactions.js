@@ -2,6 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actions from './../actions/actionCreators.js'
 
+
+const formatInput = (key) => {
+   key = key.key
+
+}
+
+
 const Transactions = ({
    account,
    dispatch
@@ -38,7 +45,12 @@ const Transactions = ({
                   onKeyPress={key=>{
                      if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
                         key.preventDefault();
+                     } else if (key.charCode === 48 && transAmount.value.length === 0) {
+                        key.preventDefault();
                      }
+
+                     key.target.value = "20.10";
+                     key.preventDefault();
                   }}
                   ref={node=>{
                      transAmount=node;

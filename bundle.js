@@ -21293,20 +21293,25 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Balance = function Balance(_ref) {
-	   var account = _ref.account;
+	var Balance = _react2.default.createClass({
+	   displayName: 'Balance',
 	
-	   var colorClass = void 0;
-	   if (account.balance < 0) {
-	      colorClass = "red";
+	
+	   determineColor: function determineColor() {
+	      if (this.props.account.balance < 0) {
+	         return "red";
+	      }
+	   },
+	
+	   render: function render() {
+	      return _react2.default.createElement(
+	         'h1',
+	         { className: "ui header " + this.determineColor() },
+	         '$ ',
+	         this.props.account.balance
+	      );
 	   }
-	   return _react2.default.createElement(
-	      'h1',
-	      { className: "ui header " + colorClass },
-	      '$ ',
-	      account.balance
-	   );
-	};
+	});
 	
 	var select = function select(state) {
 	   return {
@@ -21337,6 +21342,10 @@
 	var _actionCreators2 = _interopRequireDefault(_actionCreators);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var formatInput = function formatInput(key) {
+	   key = key.key;
+	};
 	
 	var Transactions = function Transactions(_ref) {
 	   var account = _ref.account;
@@ -21387,7 +21396,12 @@
 	               onKeyPress: function onKeyPress(key) {
 	                  if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
 	                     key.preventDefault();
+	                  } else if (key.charCode === 48 && transAmount.value.length === 0) {
+	                     key.preventDefault();
 	                  }
+	
+	                  key.target.value = "20.10";
+	                  key.preventDefault();
 	               },
 	               ref: function ref(node) {
 	                  transAmount = node;
