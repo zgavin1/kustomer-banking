@@ -1,13 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from './../actions/actionCreators.js'
-
-
-const formatInput = (key) => {
-   key = key.key
-
-}
-
+import Input from './input';
 
 const Transactions = ({
    account,
@@ -38,23 +32,7 @@ const Transactions = ({
             </button>
             <div className="ui right labeled input">
                <div className="ui label">$</div>
-               <input
-                  type="number"
-                  min="0"
-                  placeholder="0"
-                  onKeyPress={key=>{
-                     if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
-                        key.preventDefault();
-                     } else if (key.charCode === 48 && transAmount.value.length === 0) {
-                        key.preventDefault();
-                     }
-
-                     key.target.value = "20.10";
-                     key.preventDefault();
-                  }}
-                  ref={node=>{
-                     transAmount=node;
-                  }} />
+               <Input cents={true} />
 
                <div className="ui basic label">.</div>
             </div>

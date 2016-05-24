@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const Balance = React.createClass ({
 
-   determineColor: function () {
+   determineColor: function() {
       if (this.props.account.balance < 0) {
          return "red";
       }

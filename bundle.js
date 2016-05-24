@@ -21341,11 +21341,11 @@
 	
 	var _actionCreators2 = _interopRequireDefault(_actionCreators);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _input = __webpack_require__(189);
 	
-	var formatInput = function formatInput(key) {
-	   key = key.key;
-	};
+	var _input2 = _interopRequireDefault(_input);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Transactions = function Transactions(_ref) {
 	   var account = _ref.account;
@@ -21389,23 +21389,7 @@
 	               { className: 'ui label' },
 	               '$'
 	            ),
-	            _react2.default.createElement('input', {
-	               type: 'number',
-	               min: '0',
-	               placeholder: '0',
-	               onKeyPress: function onKeyPress(key) {
-	                  if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
-	                     key.preventDefault();
-	                  } else if (key.charCode === 48 && transAmount.value.length === 0) {
-	                     key.preventDefault();
-	                  }
-	
-	                  key.target.value = "20.10";
-	                  key.preventDefault();
-	               },
-	               ref: function ref(node) {
-	                  transAmount = node;
-	               } }),
+	            _react2.default.createElement(_input2.default, { cents: true }),
 	            _react2.default.createElement(
 	               'div',
 	               { className: 'ui basic label' },
@@ -21673,6 +21657,54 @@
 	   account: account,
 	   ledger: ledger
 	});
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Input = _react2.default.createClass({
+	   displayName: 'Input',
+	
+	   render: function render() {
+	      var _this = this;
+	
+	      var transAmount = void 0;
+	      var cents = this.props.cents;
+	
+	      return _react2.default.createElement('input', {
+	         type: 'number',
+	         min: '0',
+	         max: cents ? "99" : "",
+	         placeholder: cents ? "00" : "0",
+	         onKeyPress: function onKeyPress(key) {
+	            if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
+	               key.preventDefault();
+	            } else if (key.charCode === 48 && transAmount.value.length === 0) {
+	               key.preventDefault();
+	            }
+	            if (_this.props.cents && key.target.value.length === 2) key.preventDefault();
+	         },
+	         ref: function ref(node) {
+	            transAmount = node;
+	         } });
+	   }
+	});
+	
+	exports.default = (0, _reactRedux.connect)()(Input);
 
 /***/ }
 /******/ ]);
