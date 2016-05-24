@@ -8,7 +8,7 @@ const myApp = () => {
    return (
     <div className="ui container center aligned">
       <div className="ui container center aligned">
-        <h1 className="ui header">
+        <h1 className="ui masthead">
            Banking App
         </h1>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from './../actions/actionCreators.js'
+import Input from './input';
 
 const Transactions = ({
    account,
@@ -11,6 +12,14 @@ const Transactions = ({
    return (
       <div className="ui container">
          <div className="ui left action input">
+            <div className="ui left labeled input">
+               <div className="ui label">$</div>
+               <Input cents={false} />
+               <strong className="ui label">.</strong>
+               <Input cents={true} />
+            </div>
+         </div>
+         <div className="ui container">
             <button className="ui teal labeled icon button"
                onClick={e=>{
                   e.preventDefault();
@@ -29,6 +38,7 @@ const Transactions = ({
                }} >
                 WITHDRAW
             </button>
+<<<<<<< HEAD
             <div className="ui right labeled input">
                <div className="ui label">$</div>
                <input
@@ -45,6 +55,19 @@ const Transactions = ({
                   }} />
                <div className="ui basic label">.</div>
             </div>
+||||||| merged common ancestors
+            <div className="ui right labeled input">
+               <div className="ui label">$</div>
+               <input
+                  type="text"
+                  placeholder="0"
+                  ref={node=>{
+                     transAmount=node;
+                  }} />
+               <div className="ui basic label">.</div>
+            </div>
+=======
+>>>>>>> master
          </div>
       </div>
    );

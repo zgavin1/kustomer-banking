@@ -554,7 +554,7 @@ h5 {
 
 h1 {
   min-height: 1rem;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 h2 {
@@ -6291,7 +6291,7 @@ i.flag.zimbabwe:before {
 ---------------*/
 
 h1.ui.header {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 h2.ui.header {
@@ -6338,7 +6338,7 @@ h5.ui.header .sub.header {
 
 .ui.huge.header {
   min-height: 1em;
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .ui.large.header {
