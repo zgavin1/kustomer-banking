@@ -17,3 +17,11 @@ input[type=number]::-webkit-outer-spin-button {
 .ui.container {
    margin: .5em;
 }
+
+.deficit {
+   color: red;
+}
+
+.surplus {
+   color: green;
+}
