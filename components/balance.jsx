@@ -1,15 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Balance = React.createClass ({
-
-   determineColor: function() {
-      return this.props.account.balance < 0 ? "red":"";
+const Balance = React.createClass({
+   formatBalance: function(balance) {
+      if (balance < 0) {
+         return <span className="deficit"><em>( $ {Math.abs(balance)} )</em></span>
+      } else if (balance > 0) {
+         return <span className="surplus">$ {balance}</span>
+      } else {
+         return <span>$ {balance}</span>
+      }
    },
 
    render: function () {
+      const balance = this.formatBalance(this.props.account.balance);
       return (
-         <h1 className={"ui balance-display " + this.determineColor()}>$ {this.props.account.balance}</h1>
+         <h1 className="ui balance-display ">{balance}</h1>
       );
    }
 });

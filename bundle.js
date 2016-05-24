@@ -21296,17 +21296,42 @@
 	var Balance = _react2.default.createClass({
 	   displayName: 'Balance',
 	
-	
-	   determineColor: function determineColor() {
-	      return this.props.account.balance < 0 ? "red" : "";
+	   formatBalance: function formatBalance(balance) {
+	      if (balance < 0) {
+	         return _react2.default.createElement(
+	            'span',
+	            { className: 'deficit' },
+	            _react2.default.createElement(
+	               'em',
+	               null,
+	               '( $ ',
+	               Math.abs(balance),
+	               ' )'
+	            )
+	         );
+	      } else if (balance > 0) {
+	         return _react2.default.createElement(
+	            'span',
+	            { className: 'surplus' },
+	            '$ ',
+	            balance
+	         );
+	      } else {
+	         return _react2.default.createElement(
+	            'span',
+	            null,
+	            '$ ',
+	            balance
+	         );
+	      }
 	   },
 	
 	   render: function render() {
+	      var balance = this.formatBalance(this.props.account.balance);
 	      return _react2.default.createElement(
 	         'h1',
-	         { className: "ui balance-display " + this.determineColor() },
-	         '$ ',
-	         this.props.account.balance
+	         { className: 'ui balance-display ' },
+	         balance
 	      );
 	   }
 	});
@@ -21345,63 +21370,85 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Transactions = function Transactions(_ref) {
-	   var account = _ref.account;
-	   var dispatch = _ref.dispatch;
+	var Transactions = _react2.default.createClass({
+	   displayName: 'Transactions',
 	
-	   var transAmount = void 0;
+	   getInitialState: function getInitialState() {
+	      return {
+	         dollarAmount: "",
+	         centAmount: ""
+	      };
+	   },
 	
-	   return _react2.default.createElement(
-	      'div',
-	      { className: 'ui container' },
-	      _react2.default.createElement(
-	         'div',
-	         { className: 'ui left action input' },
-	         _react2.default.createElement(
-	            'div',
-	            { className: 'ui left labeled input' },
-	            _react2.default.createElement(
-	               'div',
-	               { className: 'ui label' },
-	               '$'
-	            ),
-	            _react2.default.createElement(_input2.default, { cents: false }),
-	            _react2.default.createElement(
-	               'strong',
-	               { className: 'ui label' },
-	               '.'
-	            ),
-	            _react2.default.createElement(_input2.default, { cents: true })
-	         )
-	      ),
-	      _react2.default.createElement(
+	   onInputChange: function onInputChange(input, cents) {
+	      if (cents) {
+	         this.setState({ centAmount: input });
+	      } else {
+	         this.setState({ dollarAmount: input });
+	      }
+	   },
+	
+	   render: function render() {
+	      var _this = this;
+	
+	      return _react2.default.createElement(
 	         'div',
 	         { className: 'ui container' },
 	         _react2.default.createElement(
-	            'button',
-	            { className: 'ui teal labeled icon button',
-	               onClick: function onClick(e) {
-	                  e.preventDefault();
-	                  if (!transAmount.value || transAmount.value === "0") rer;
-	                  dispatch(_actionCreators2.default.deposit(transAmount.value, account.balance));
-	                  transAmount.value = "";
-	               } },
-	            'DEPOSIT'
+	            'div',
+	            { className: 'ui left action input' },
+	            _react2.default.createElement(
+	               'div',
+	               { className: 'ui left labeled input' },
+	               _react2.default.createElement(
+	                  'div',
+	                  { className: 'ui label' },
+	                  '$'
+	               ),
+	               _react2.default.createElement(_input2.default, { cents: false, onChange: this.onInputChange }),
+	               _react2.default.createElement(
+	                  'strong',
+	                  { className: 'ui label' },
+	                  '.'
+	               ),
+	               _react2.default.createElement(_input2.default, { cents: true, onChange: this.onInputChange })
+	            )
 	         ),
 	         _react2.default.createElement(
-	            'button',
-	            { className: 'ui teal labeled icon button',
-	               onClick: function onClick(e) {
-	                  e.preventDefault();
-	                  if (!transAmount.value || transAmount.value === "0") return;
-	                  dispatch(_actionCreators2.default.withdraw(transAmount.value, account.balance));
-	                  transAmount.value = "";
-	               } },
-	            'WITHDRAW'
+	            'div',
+	            { className: 'ui container' },
+	            _react2.default.createElement(
+	               'button',
+	               { className: 'ui teal button',
+	                  onClick: function onClick(e) {
+	                     e.preventDefault();
+	                     if (!_this.state.dollarAmount && !_this.state.centAmount) return;
+	                     // this.props.dispatch(actions.deposit(transAmount.value, this.props.account.balance));
+	                     _this.props.dispatch(_actionCreators2.default.deposit(_this.state.dollarAmount + "." + _this.state.centAmount, _this.props.account.balance));
+	
+	                     _this.setState({ dollarAmount: "", centAmount: "" });
+	                  } },
+	               'DEPOSIT'
+	            ),
+	            _react2.default.createElement(
+	               'button',
+	               { className: 'ui teal button',
+	                  onClick: function onClick(e) {
+	                     e.preventDefault();
+	                     if (!_this.state.dollarAmount && !_this.state.centAmount) return;
+	
+	                     _this.props.dispatch(_actionCreators2.default.withdraw(_this.state.dollarAmount + "." + _this.state.centAmount, _this.props.account.balance));
+	
+	                     _this.setState({ dollarAmount: "", centAmount: "" });
+	                     // this.props.dispatch(actions.withdraw(dollarAmount.value + , this.props.account.balance));
+	                     // transAmount.value = "";
+	                  } },
+	               'WITHDRAW'
+	            )
 	         )
-	      )
-	   );
-	};
+	      );
+	   }
+	});
 	
 	var select = function select(state) {
 	   return {
@@ -21704,6 +21751,12 @@
 	var Input = _react2.default.createClass({
 	   displayName: 'Input',
 	
+	
+	   onInput: function onInput(input) {
+	      input = input.target.value;
+	      this.props.onChange(input, this.props.cents);
+	   },
+	
 	   render: function render() {
 	      var _this = this;
 	
@@ -21716,13 +21769,14 @@
 	         max: cents ? "99" : "",
 	         placeholder: cents ? "00" : "0",
 	         onKeyPress: function onKeyPress(key) {
-	            if (key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
+	            if (key.charCode === 46 || key.charCode === 45 || key.charCode === 43 || key.charCode === 69 || key.charCode === 101) {
 	               key.preventDefault();
 	            } else if (key.charCode === 48 && transAmount.value.length === 0) {
 	               key.preventDefault();
 	            }
 	            if (_this.props.cents && key.target.value.length === 2) key.preventDefault();
 	         },
+	         onChange: this.onInput,
 	         ref: function ref(node) {
 	            transAmount = node;
 	         } });
