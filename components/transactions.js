@@ -14,7 +14,7 @@ const Transactions = ({
             <button className="ui teal labeled icon button"
                onClick={e=>{
                   e.preventDefault();
-                  if (!transAmount.value || transAmount.value === "0") return;
+                  if (!transAmount.value || transAmount.value === "0") rer
                   dispatch(actions.deposit(transAmount.value, account.balance));
                   transAmount.value = "";
                }} >
@@ -42,8 +42,8 @@ const Transactions = ({
                   }}
                   ref={node=>{
                      transAmount=node;
-                  }} ></input>
-               <div className="ui basic label">{'.'}</div>
+                  }} />
+               <div className="ui basic label">.</div>
             </div>
          </div>
       </div>
