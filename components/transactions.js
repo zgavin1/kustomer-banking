@@ -2,19 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actions from './../actions/actionCreators.js'
 
-// // SHOULD GO IN UTIL DIRECTORY
-// let depositId = 0;
-// const makeDeposit = (amount, balance) => {
-//    amount = parseFloat(amount);
-//    return {
-//       type: "DEPOSIT",
-//       id: depositId++,
-//       amount: amount,
-//       newBalance: amount + balance,
-//       date: new Date().toDateString()
-//    };
-// }
-
 const Transactions = ({
    account,
    dispatch
