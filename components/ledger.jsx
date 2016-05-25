@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import C from './../constants';
+import Utils form './util/bankingUtils';
 
 
 const Ledger = React.createClass({
@@ -67,7 +68,7 @@ const Ledger = React.createClass({
 
 const select = (state) => {
    return {
-      rows: state.ledger
+      rows: Utils.getVisibleRows(state.ledger, state.filter)
    };
 }
 

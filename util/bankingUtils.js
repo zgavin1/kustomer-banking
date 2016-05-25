@@ -3,6 +3,27 @@ import C from './../constants';
 let depositId = 0;
 
 const utils = {
+   getVisibleRows: (rows, filter) => {
+      switch (filter) {
+         case "SHOW_ALL":
+            return rows;
+         case "SHOW_WITHDRAWALS":
+            return rows.filter(
+               (r) => {
+                  r.type === C.WITHDRAWAL;
+               }
+            );
+         case "SHOW_DEPOSITS":
+            return rows.filter(
+               (r) => {
+                  r.type === C.DEPOSIT;
+               }
+            );
+         default:
+            return rows;
+      }
+   },
+
    makeTransaction: (dollars, cents, currentBalance, type) => {
       dollars = dollars || 0;
       cents = cents || 0;

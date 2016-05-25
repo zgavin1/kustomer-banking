@@ -6,5 +6,6 @@ export default {
    },
    withdraw: (dollars, cents, prevBalance) => {
       return utils.makeWithdrawal(dollars, cents, prevBalance);
-   }
+   },
+   
 }

@@ -21248,7 +21248,7 @@
 	
 	var _transactions2 = _interopRequireDefault(_transactions);
 	
-	var _ledger = __webpack_require__(188);
+	var _ledger = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./../components/ledger\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _ledger2 = _interopRequireDefault(_ledger);
 	
@@ -21488,13 +21488,14 @@
 	   withdraw: function withdraw(dollars, cents, prevBalance) {
 	      return _bankingUtils2.default.makeWithdrawal(dollars, cents, prevBalance);
 	   }
+	
 	};
 
 /***/ },
 /* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	   value: true
@@ -21509,6 +21510,23 @@
 	var depositId = 0;
 	
 	var utils = {
+	   getVisibleRows: function getVisibleRows(rows, filter) {
+	      switch (filter) {
+	         case "SHOW_ALL":
+	            return rows;
+	         case "SHOW_WITHDRAWALS":
+	            return rows.filter(function (r) {
+	               r.type === _constants2.default.WITHDRAWAL;
+	            });
+	         case "SHOW_DEPOSITS":
+	            return rows.filter(function (r) {
+	               r.type === _constants2.default.DEPOSIT;
+	            });
+	         default:
+	            return rows;
+	      }
+	   },
+	
 	   makeTransaction: function makeTransaction(dollars, cents, currentBalance, type) {
 	      dollars = dollars || 0;
 	      cents = cents || 0;
@@ -21612,164 +21630,7 @@
 	exports.default = (0, _reactRedux.connect)()(Input);
 
 /***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(158);
-	
-	var _constants = __webpack_require__(186);
-	
-	var _constants2 = _interopRequireDefault(_constants);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Ledger = _react2.default.createClass({
-	   displayName: 'Ledger',
-	
-	   formatLargeNumber: function formatLargeNumber(num) {
-	      return Math.abs(parseFloat(num)).toLocaleString("us", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
-	   },
-	
-	   formatRows: function formatRows() {
-	      var _this = this;
-	
-	      var rows = this.props.rows;
-	
-	      var ledgerRows = rows.map(function (row) {
-	         var typeClass = row.type === _constants2.default.WITHDRAWAL ? "deficit" : "surplus";
-	         var balanceClass = row.balance <= 0 ? "deficit" : "surplus";
-	
-	         var amount = _this.formatLargeNumber(row.amount);
-	         var balance = _this.formatLargeNumber(row.balance);
-	
-	         return _react2.default.createElement(
-	            'tr',
-	            { className: 'ledger-row', key: row.id },
-	            _react2.default.createElement(
-	               'td',
-	               { className: "ui right aligned " + typeClass },
-	               row.type
-	            ),
-	            _react2.default.createElement(
-	               'td',
-	               { className: "ui right aligned " + typeClass },
-	               amount
-	            ),
-	            _react2.default.createElement(
-	               'td',
-	               { className: "ui right aligned " + balanceClass },
-	               balance
-	            ),
-	            _react2.default.createElement(
-	               'td',
-	               { className: 'ui right aligned' },
-	               row.date
-	            )
-	         );
-	      }).reverse();
-	
-	      if (rows.length === 0) {
-	         ledgerRows = _react2.default.createElement(
-	            'tr',
-	            { key: '0' },
-	            _react2.default.createElement(
-	               'td',
-	               { className: 'ui right aligned' },
-	               'None'
-	            ),
-	            _react2.default.createElement(
-	               'td',
-	               { className: 'ui right aligned' },
-	               'None'
-	            ),
-	            _react2.default.createElement(
-	               'td',
-	               { className: 'ui right aligned' },
-	               'None'
-	            ),
-	            _react2.default.createElement(
-	               'td',
-	               { className: 'ui right aligned' },
-	               'None'
-	            )
-	         );
-	      }
-	      return ledgerRows;
-	   },
-	
-	   render: function render() {
-	      return _react2.default.createElement(
-	         'div',
-	         { className: 'ui container' },
-	         _react2.default.createElement(
-	            'table',
-	            { className: 'ui celled table' },
-	            _react2.default.createElement(
-	               'thead',
-	               null,
-	               _react2.default.createElement(
-	                  'tr',
-	                  null,
-	                  _react2.default.createElement(
-	                     'th',
-	                     { className: 'ui right aligned' },
-	                     'Type'
-	                  ),
-	                  _react2.default.createElement(
-	                     'th',
-	                     { className: 'ui right aligned' },
-	                     'Amount'
-	                  ),
-	                  _react2.default.createElement(
-	                     'th',
-	                     { className: 'ui right aligned' },
-	                     'Balance'
-	                  ),
-	                  _react2.default.createElement(
-	                     'th',
-	                     { className: 'ui right aligned' },
-	                     'Date'
-	                  )
-	               )
-	            ),
-	            _react2.default.createElement(
-	               'tbody',
-	               null,
-	               this.formatRows()
-	            ),
-	            _react2.default.createElement(
-	               'tfoot',
-	               null,
-	               _react2.default.createElement(
-	                  'tr',
-	                  null,
-	                  _react2.default.createElement('th', { colSpan: '4' })
-	               )
-	            )
-	         )
-	      );
-	   }
-	});
-	
-	var select = function select(state) {
-	   return {
-	      rows: state.ledger
-	   };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(select)(Ledger);
-
-/***/ },
+/* 188 */,
 /* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21827,9 +21688,22 @@
 	   }
 	};
 	
+	var visibilityFilter = function visibilityFilter() {
+	   var state = arguments.length <= 0 || arguments[0] === undefined ? "SHOW_ALL" : arguments[0];
+	   var action = arguments[1];
+	
+	   switch (action.type) {
+	      case 'SET_VISIBILITY_FILTER':
+	         return action.filter;
+	   };
+	
+	   return state;
+	};
+	
 	exports.default = (0, _redux.combineReducers)({
 	   account: account,
-	   ledger: ledger
+	   ledger: ledger,
+	   visibilityFilter: visibilityFilter
 	});
 
 /***/ }
