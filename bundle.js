@@ -21296,6 +21296,10 @@
 	var Balance = _react2.default.createClass({
 	   displayName: 'Balance',
 	
+	   formatLargeNumber: function formatLargeNumber(num) {
+	      return Math.abs(parseFloat(num)).toLocaleString("us", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
+	   },
+	
 	   formatBalance: function formatBalance(balance) {
 	      if (balance < 0) {
 	         return _react2.default.createElement(
@@ -21304,8 +21308,8 @@
 	            _react2.default.createElement(
 	               'em',
 	               null,
-	               '( $ ',
-	               Math.abs(balance).toFixed(2),
+	               '( ',
+	               this.formatLargeNumber(balance),
 	               ' )'
 	            )
 	         );
@@ -21313,8 +21317,7 @@
 	         return _react2.default.createElement(
 	            'span',
 	            { className: 'surplus' },
-	            '$ ',
-	            balance
+	            this.formatLargeNumber(balance)
 	         );
 	      } else {
 	         return _react2.default.createElement(
@@ -21553,7 +21556,7 @@
 	            id: depositId++,
 	            amount: amount.toFixed(2),
 	            balance: balance.toFixed(2),
-	            date: new Date().toDateString(),
+	            date: new Date().toString(),
 	            type: type
 	         }
 	      };
@@ -21641,29 +21644,36 @@
 	
 	var _reactRedux = __webpack_require__(158);
 	
+	var _constants = __webpack_require__(185);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Ledger = function Ledger(_ref) {
 	   var rows = _ref.rows;
 	
 	   var ledgerRows = rows.map(function (row) {
+	      var typeClass = row.type === _constants2.default.WITHDRAWAL ? "deficit" : "surplus";
+	      var balanceClass = row.balance <= 0 ? "deficit" : "surplus";
+	      // debugger
 	      return _react2.default.createElement(
 	         'tr',
-	         { key: row.id },
+	         { className: 'ledger-row', key: row.id },
 	         _react2.default.createElement(
 	            'td',
-	            { className: 'ui right aligned' },
+	            { className: "ui right aligned " + typeClass },
 	            row.type
 	         ),
 	         _react2.default.createElement(
 	            'td',
-	            { className: 'ui right aligned' },
+	            { className: "ui right aligned " + typeClass },
 	            '$',
 	            row.amount
 	         ),
 	         _react2.default.createElement(
 	            'td',
-	            { className: 'ui right aligned' },
+	            { className: "ui right aligned " + balanceClass },
 	            '$',
 	            row.balance
 	         ),

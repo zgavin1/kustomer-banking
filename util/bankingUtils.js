@@ -36,7 +36,7 @@ const utils = {
             id: depositId++,
             amount: amount.toFixed(2),
             balance: balance.toFixed(2),
-            date: new Date().toDateString(),
+            date: new Date().toString(),
             type: type
          }
       };

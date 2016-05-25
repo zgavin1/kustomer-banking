@@ -1,16 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import C from './../constants';
 
 
 const Ledger = ({
    rows
 }) => {
    let ledgerRows = rows.map((row)=>{
+      let typeClass = row.type === C.WITHDRAWAL ? "deficit":"surplus";
+      let balanceClass = row.balance <= 0 ? "deficit":"surplus";
+      // debugger
       return (
-         <tr key={row.id}>
-            <td className="ui right aligned">{row.type}</td>
-            <td className="ui right aligned">${row.amount}</td>
-            <td className="ui right aligned">${row.balance}</td>
+         <tr className="ledger-row" key={row.id}>
+            <td className={"ui right aligned "+ typeClass}>{row.type}</td>
+            <td className={"ui right aligned "+ typeClass}>${row.amount}</td>
+            <td className={"ui right aligned "+ balanceClass}>${row.balance}</td>
             <td className="ui right aligned">{row.date}</td>
          </tr>
       );
@@ -31,7 +35,6 @@ const Ledger = ({
       <div className="ui container">
          <table className="ui celled table">
             <thead>
-
                <tr><th className="ui right aligned">Type</th>
                <th className="ui right aligned">Amount</th>
                <th className="ui right aligned">Balance</th>
