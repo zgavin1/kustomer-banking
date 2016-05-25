@@ -1,4 +1,8 @@
 #Banking App
+
+[![Zach Gavin's solution](/assets/KustomerBankingSS.png)](http://www.zach-gavin.com/kustomer-banking)
+
+
 To run: 
 - in your browser, navigate to http://zach-gavin.com/kustomer-banking
 
@@ -6,7 +10,7 @@ OR
 
 - in your terminal, git clone the repo
 - run `npm install` to load dependencies like react, redux, semantic-ui
-- navigate to the "semantic" subdirectory, run gulp build
+- navigate to the "semantic" subdirectory, run `gulp build`
 - navigate back to the home directory, run `webpack` to transpile the es6 syntax and build the code in a bundle.js file
 
 - open the file "index.js" in your browser
@@ -30,3 +34,5 @@ Date could be formatted better. Could implement MomentJS for this easily.
 Tests for Components. These are a bit more involved than tests for actions and reducers.
 
 More filtering/sorting features.
+
+Should make ledger Rows a component. This would make the ledger component far less complex.
