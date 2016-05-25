@@ -21677,7 +21677,11 @@
 	var Ledger = _react2.default.createClass({
 	   displayName: 'Ledger',
 	
-	   formatLargeNumber: function formatLargeNumber(num) {
+	   formatLargeNumber: function formatLargeNumber(num, deficit) {
+	      num = parseFloat(num);
+	      if (num < 0 || deficit) {
+	         return "( " + Math.abs(parseFloat(num)).toLocaleString("us", { style: "currency", currency: "USD", minimumFractionDigits: 2 }) + " )";
+	      }
 	      return Math.abs(parseFloat(num)).toLocaleString("us", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
 	   },
 	
@@ -21690,7 +21694,7 @@
 	         var typeClass = row.type === _constants2.default.WITHDRAWAL ? "deficit" : "surplus";
 	         var balanceClass = row.balance <= 0 ? "deficit" : "surplus";
 	
-	         var amount = _this.formatLargeNumber(row.amount);
+	         var amount = _this.formatLargeNumber(row.amount, typeClass);
 	         var balance = _this.formatLargeNumber(row.balance);
 	
 	         return _react2.default.createElement(

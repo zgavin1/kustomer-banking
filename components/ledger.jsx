@@ -5,8 +5,12 @@ import Utils from './../util/bankingUtils';
 
 
 const Ledger = React.createClass({
-   formatLargeNumber: function(num) {
-      return Math.abs(parseFloat(num)).toLocaleString("us", {style: "currency", currency: "USD", minimumFractionDigits: 2})
+   formatLargeNumber: function(num, deficit) {
+      num = parseFloat(num);
+      if (num < 0 || deficit) {
+         return "( " + Math.abs(parseFloat(num)).toLocaleString("us", {style: "currency", currency: "USD", minimumFractionDigits: 2}) + " )";  
+      }
+      return Math.abs(parseFloat(num)).toLocaleString("us", {style: "currency", currency: "USD", minimumFractionDigits: 2});
    },
 
    formatRows: function () {
@@ -16,7 +20,7 @@ const Ledger = React.createClass({
          let typeClass = row.type === C.WITHDRAWAL ? "deficit":"surplus";
          let balanceClass = row.balance <= 0 ? "deficit":"surplus";
          
-         const amount = this.formatLargeNumber(row.amount);
+         const amount = this.formatLargeNumber(row.amount, typeClass);
          const balance = this.formatLargeNumber(row.balance)
 
          return (
