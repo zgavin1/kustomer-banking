@@ -3,11 +3,10 @@ import reducer from './../reducers/root';
 import C from './../constants';
 
 describe('account reducer', () => {
-   it('should return the initial state', () => {
+   it('should return the default account state', () => {
       expect(reducer(undefined, {}))
-         .toEqual({
-            account: {balance: "0.00"},
-            ledger: []
+         .toInclude({
+            account: {balance: "0.00"}
          });
    });
 
@@ -54,10 +53,9 @@ describe('account reducer', () => {
 });
 
 describe('ledger reducer', () => {
-   it('should return the initial state', () => {
+   it('should return default default ledeger state', () => {
       expect(reducer(undefined, {}))
-         .toEqual({
-            account: {balance: "0.00"},
+         .toInclude({
             ledger: []
          });
    });
@@ -115,8 +113,34 @@ describe('ledger reducer', () => {
          testState = reducer(testState, testAction)
       }
 
-      expect(testLedger.ledger.length)
+      expect(testState.ledger.length)
          .toEqual(5);
    })
-
 })
+
+describe('filter reducer', ()=>{
+   it('should return state with default filter', ()=>{
+      expect(reducer(undefined, {}))
+         .toInclude({
+            filter: "SHOW_ALL"
+         });
+   })
+
+   it('should change filters', ()=>{
+      let testAction = {
+         type: C.SET_VISIBILITY_FILTER,
+         filter: C.SHOW_DEPOSITS
+      }
+
+      expect(reducer(undefined, testAction).filter)
+         .toEqual(C.SHOW_DEPOSITS)
+
+      testAction = {
+         type: C.SET_VISIBILITY_FILTER,
+         filter: C.SHOW_WITHDRAWALS
+      }
+
+      expect(reducer(undefined, testAction).filter)
+         .toEqual(C.SHOW_WITHDRAWALS)
+   })
+});

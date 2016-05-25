@@ -24,3 +24,9 @@ Instead of constraints, I could (and probably should) have some alerts on bad in
 Filter buttons resize. Just ran out of time.
 
 Date could be formatted better. Could implement MomentJS for this easily.
+
+##Potential Improvements
+
+Tests for Components. These are a bit more involved than tests for actions and reducers.
+
+More filtering/sorting features.

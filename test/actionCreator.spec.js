@@ -59,4 +59,17 @@ describe('action creator', () => {
             .toBeA('number')
       });
    });
+
+   describe('setFilter', () => {
+
+      it('should create an action to set a new filter', () => {
+         expect(actions.setFilter(C.SHOW_DEPOSITS).type)
+            .toEqual(C.SET_VISIBILITY_FILTER);
+      });
+
+      it('action should have filter', () => {
+         expect(actions.setFilter(C.SHOW_DEPOSITS))
+            .toInclude({filter: "SHOW_DEPOSITS"})
+      });
+   })
 });

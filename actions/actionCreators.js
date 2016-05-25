@@ -1,4 +1,5 @@
 import utils from './../util/bankingUtils';
+import C from './../constants';
 
 export default {
    deposit: (dollars, cents, prevBalance) => {
@@ -7,9 +8,9 @@ export default {
    withdraw: (dollars, cents, prevBalance) => {
       return utils.makeWithdrawal(dollars, cents, prevBalance);
    },
-   setFilter: (type, filter) => {
+   setFilter: (filter) => {
       return {
-         type: type,
+         type: C.SET_VISIBILITY_FILTER,
          filter: filter
       }
    }

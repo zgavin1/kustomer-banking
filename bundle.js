@@ -21484,6 +21484,10 @@
 	
 	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
 	
+	var _constants = __webpack_require__(186);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
@@ -21493,9 +21497,9 @@
 	   withdraw: function withdraw(dollars, cents, prevBalance) {
 	      return _bankingUtils2.default.makeWithdrawal(dollars, cents, prevBalance);
 	   },
-	   setFilter: function setFilter(type, filter) {
+	   setFilter: function setFilter(filter) {
 	      return {
-	         type: type,
+	         type: _constants2.default.SET_VISIBILITY_FILTER,
 	         filter: filter
 	      };
 	   }
@@ -21920,7 +21924,7 @@
 	var mapDispatchToLinkProps = function mapDispatchToLinkProps(dispatch, ownProps) {
 	  return {
 	    onClick: function onClick() {
-	      dispatch(_actionCreators2.default.setFilter(_constants2.default.SET_VISIBILITY_FILTER, ownProps.filter));
+	      dispatch(_actionCreators2.default.setFilter(ownProps.filter));
 	    }
 	  };
 	};

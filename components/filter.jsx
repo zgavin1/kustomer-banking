@@ -39,7 +39,7 @@ const mapDispatchToLinkProps = (
 ) => {
    return {
       onClick: () => {
-         dispatch(actions.setFilter(C.SET_VISIBILITY_FILTER, ownProps.filter))
+         dispatch(actions.setFilter(ownProps.filter))
       }
    };
 };
