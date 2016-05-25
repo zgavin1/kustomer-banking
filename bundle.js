@@ -21305,7 +21305,7 @@
 	               'em',
 	               null,
 	               '( $ ',
-	               Math.abs(balance),
+	               Math.abs(balance).toFixed(2),
 	               ' )'
 	            )
 	         );
@@ -21423,8 +21423,11 @@
 	                  onClick: function onClick(e) {
 	                     e.preventDefault();
 	                     if (!_this.state.dollarAmount && !_this.state.centAmount) return;
-	                     // this.props.dispatch(actions.deposit(transAmount.value, this.props.account.balance));
 	                     _this.props.dispatch(_actionCreators2.default.deposit(_this.state.dollarAmount, _this.state.centAmount, _this.props.account.balance));
+	
+	                     var inputs = document.getElementsByTagName('input');
+	                     inputs[0].value = "";
+	                     inputs[1].value = "";
 	
 	                     _this.setState({ dollarAmount: "", centAmount: "" });
 	                  } },
@@ -21438,9 +21441,11 @@
 	                     if (!_this.state.dollarAmount && !_this.state.centAmount) return;
 	                     _this.props.dispatch(_actionCreators2.default.withdraw(_this.state.dollarAmount, _this.state.centAmount, _this.props.account.balance));
 	
+	                     var inputs = document.getElementsByTagName('input');
+	                     inputs[0].value = "";
+	                     inputs[1].value = "";
+	
 	                     _this.setState({ dollarAmount: "", centAmount: "" });
-	                     // this.props.dispatch(actions.withdraw(dollarAmount.value + , this.props.account.balance));
-	                     // transAmount.value = "";
 	                  } },
 	               'WITHDRAW'
 	            )
@@ -21466,10 +21471,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	   value: true
 	});
-	
-	var _constants = __webpack_require__(185);
-	
-	var _constants2 = _interopRequireDefault(_constants);
 	
 	var _bankingUtils = __webpack_require__(186);
 	
@@ -21497,7 +21498,7 @@
 	});
 	exports.default = {
 	   DEPOSIT: "DEPOSIT",
-	   WITHDRAW: "WITHDRAW"
+	   WITHDRAWAL: "WITHDRAWAL"
 	};
 
 /***/ },
@@ -21541,7 +21542,7 @@
 	      cents = cents || 0;
 	      var amount = parseInt(dollars) + parseInt(cents) / 100;
 	      var balance = void 0;
-	      if (type === _constants2.default.WITHDRAW) {
+	      if (type === _constants2.default.WITHDRAWAL) {
 	         balance = parseFloat(currentBalance) - amount;
 	      } else {
 	         balance = parseFloat(currentBalance) + amount;
@@ -21563,7 +21564,7 @@
 	   },
 	
 	   makeWithdrawal: function makeWithdrawal(dollars, cents, currentBalance) {
-	      return utils.makeTransaction(dollars, cents, currentBalance, _constants2.default.WITHDRAW);
+	      return utils.makeTransaction(dollars, cents, currentBalance, _constants2.default.WITHDRAWAL);
 	   }
 	};
 	
@@ -21652,6 +21653,11 @@
 	         _react2.default.createElement(
 	            'td',
 	            { className: 'ui right aligned' },
+	            row.type
+	         ),
+	         _react2.default.createElement(
+	            'td',
+	            { className: 'ui right aligned' },
 	            '$',
 	            row.amount
 	         ),
@@ -21687,6 +21693,11 @@
 	            'td',
 	            { className: 'ui right aligned' },
 	            'None'
+	         ),
+	         _react2.default.createElement(
+	            'td',
+	            { className: 'ui right aligned' },
+	            'None'
 	         )
 	      );
 	   }
@@ -21703,6 +21714,11 @@
 	            _react2.default.createElement(
 	               'tr',
 	               null,
+	               _react2.default.createElement(
+	                  'th',
+	                  { className: 'ui right aligned' },
+	                  'Type'
+	               ),
 	               _react2.default.createElement(
 	                  'th',
 	                  { className: 'ui right aligned' },
@@ -21731,7 +21747,7 @@
 	            _react2.default.createElement(
 	               'tr',
 	               null,
-	               _react2.default.createElement('th', { colSpan: '3' })
+	               _react2.default.createElement('th', { colSpan: '4' })
 	            )
 	         )
 	      )
@@ -21781,7 +21797,7 @@
 	         return _extends({}, state, {
 	            balance: action.transaction.balance
 	         });
-	      case _constants2.default.WITHDRAW:
+	      case _constants2.default.WITHDRAWAL:
 	         return _extends({}, state, {
 	            balance: action.transaction.balance
 	         });
@@ -21797,7 +21813,7 @@
 	   switch (action.type) {
 	      case _constants2.default.DEPOSIT:
 	         return [].concat(_toConsumableArray(state), [action.transaction]);
-	      case _constants2.default.WITHDRAW:
+	      case _constants2.default.WITHDRAWAL:
 	         return [].concat(_toConsumableArray(state), [action.transaction]);
 	      default:
 	         return state;

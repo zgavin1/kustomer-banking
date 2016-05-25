@@ -8,6 +8,7 @@ const Ledger = ({
    let ledgerRows = rows.map((row)=>{
       return (
          <tr key={row.id}>
+            <td className="ui right aligned">{row.type}</td>
             <td className="ui right aligned">${row.amount}</td>
             <td className="ui right aligned">${row.balance}</td>
             <td className="ui right aligned">{row.date}</td>
@@ -21,6 +22,7 @@ const Ledger = ({
             <td className="ui right aligned">None</td>
             <td className="ui right aligned">None</td>
             <td className="ui right aligned">None</td>
+            <td className="ui right aligned">None</td>
          </tr>
       );
    }
@@ -29,7 +31,9 @@ const Ledger = ({
       <div className="ui container">
          <table className="ui celled table">
             <thead>
-               <tr><th className="ui right aligned">Amount</th>
+
+               <tr><th className="ui right aligned">Type</th>
+               <th className="ui right aligned">Amount</th>
                <th className="ui right aligned">Balance</th>
                <th className="ui right aligned">Date</th>
             </tr></thead>
@@ -38,7 +42,7 @@ const Ledger = ({
             </tbody>
             <tfoot>
                <tr>
-                  <th colSpan="3"></th>
+                  <th colSpan="4"></th>
                </tr>
             </tfoot>
          </table>

@@ -35,8 +35,11 @@ const Transactions = React.createClass({
                   onClick={e=>{
                      e.preventDefault();
                      if (!this.state.dollarAmount && !this.state.centAmount) return;
-                     // this.props.dispatch(actions.deposit(transAmount.value, this.props.account.balance));
                      this.props.dispatch(actions.deposit(this.state.dollarAmount, this.state.centAmount, this.props.account.balance));
+
+                     var inputs = document.getElementsByTagName('input');
+                     inputs[0].value = "";
+                     inputs[1].value = "";
 
                      this.setState({dollarAmount: "", centAmount: ""})
                   }} >
@@ -48,9 +51,11 @@ const Transactions = React.createClass({
                      if (!this.state.dollarAmount && !this.state.centAmount) return;
                      this.props.dispatch(actions.withdraw(this.state.dollarAmount, this.state.centAmount, this.props.account.balance));
 
+                     var inputs = document.getElementsByTagName('input');
+                     inputs[0].value = "";
+                     inputs[1].value = "";
+
                      this.setState({dollarAmount: "", centAmount: ""})
-                     // this.props.dispatch(actions.withdraw(dollarAmount.value + , this.props.account.balance));
-                     // transAmount.value = "";
                   }} >
                    WITHDRAW
                </button>

@@ -12,9 +12,7 @@ OR
 
 
 <!-- TODO -->
-handle bad input
-
-format input
+clear input on submit
 
 animations
 

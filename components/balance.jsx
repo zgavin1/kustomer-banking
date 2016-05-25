@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const Balance = React.createClass({
    formatBalance: function(balance) {
       if (balance < 0) {
-         return <span className="deficit"><em>( $ {Math.abs(balance)} )</em></span>
+         return <span className="deficit"><em>( $ {Math.abs(balance).toFixed(2)} )</em></span>
       } else if (balance > 0) {
          return <span className="surplus">$ {balance}</span>
       } else {

@@ -15,7 +15,7 @@ const account = (
             ...state,
             balance: action.transaction.balance
          }
-      case C.WITHDRAW:
+      case C.WITHDRAWAL:
          return {
             ...state,
             balance: action.transaction.balance
@@ -35,7 +35,7 @@ const ledger = (
             ...state,
             action.transaction
          ];
-      case C.WITHDRAW:
+      case C.WITHDRAWAL:
          return [
             ...state,
             action.transaction

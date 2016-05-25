@@ -1,4 +1,3 @@
-import C from './../constants';
 import utils from './../util/bankingUtils';
 
 export default {

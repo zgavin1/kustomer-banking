@@ -25,7 +25,7 @@ const utils = {
       cents = cents || 0;
       const amount = (parseInt(dollars) + parseInt(cents) / 100);
       let balance;
-      if (type === C.WITHDRAW) {
+      if (type === C.WITHDRAWAL) {
          balance = parseFloat(currentBalance) - amount;
       } else {
          balance = parseFloat(currentBalance) + amount
@@ -47,7 +47,7 @@ const utils = {
    },
 
    makeWithdrawal: (dollars, cents, currentBalance) => {
-      return utils.makeTransaction(dollars, cents, currentBalance, C.WITHDRAW);
+      return utils.makeTransaction(dollars, cents, currentBalance, C.WITHDRAWAL);
    } 
 }
 
