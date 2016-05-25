@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import C from './../constants';
 
 const defaultBalance = {
-   balance: 0
+   balance: "0.00"
 }
 
 const account = (
@@ -15,7 +15,7 @@ const account = (
             ...state,
             balance: action.transaction.balance
          }
-      case C.WITHDRAW:
+      case C.WITHDRAWAL:
          return {
             ...state,
             balance: action.transaction.balance
@@ -35,7 +35,7 @@ const ledger = (
             ...state,
             action.transaction
          ];
-      case C.WITHDRAW:
+      case C.WITHDRAWAL:
          return [
             ...state,
             action.transaction

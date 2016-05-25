@@ -12,22 +12,6 @@ OR
 
 
 <!-- TODO -->
-<<<<<<< HEAD
-handle bad input (letters, negatives)
-
-improve styling
-||||||| merged common ancestors
-handle bad input
-fix issue with deposits just concatenating on balance
-improve styling
-=======
-handle bad input
-
-format input
-
-animations
->>>>>>> master
-
 animations (for adding rows)
 
 sorting/filtering
