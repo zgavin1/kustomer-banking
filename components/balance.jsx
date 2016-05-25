@@ -2,11 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Balance = React.createClass({
+   formatLargeNumber: function(num) {
+      return Math.abs(parseFloat(num)).toLocaleString("us", {style: "currency", currency: "USD", minimumFractionDigits: 2})
+   },
+
    formatBalance: function(balance) {
       if (balance < 0) {
-         return <span className="deficit"><em>( $ {Math.abs(balance).toFixed(2)} )</em></span>
+         return <span className="deficit"><em>( {this.formatLargeNumber(balance)} )</em></span>
       } else if (balance > 0) {
-         return <span className="surplus">$ {balance}</span>
+         return <span className="surplus">{this.formatLargeNumber(balance)}</span>
       } else {
          return <span>$ {balance}</span>
       }
