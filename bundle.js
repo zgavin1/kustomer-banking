@@ -21508,23 +21508,6 @@
 	
 	var depositId = 0;
 	
-	// const helpers = {
-	//    formatCurency: (dollars, cents) => {
-	//       dollars = parseInt(dollars) * 100;
-	//       cents = parseInt(cents);
-	//       let centString = cents.toString();
-	//       if (cents === 0) {
-	//          centString = ".00";
-	//       } else if (cents < 10) {
-	//          centString = ".0" + centString;
-	//       } else {
-	//          centString = "." + centString;
-	//       }
-	
-	//       return dollars.toString() + centString;
-	//    }
-	// }
-	
 	var utils = {
 	   makeTransaction: function makeTransaction(dollars, cents, currentBalance, type) {
 	      dollars = dollars || 0;

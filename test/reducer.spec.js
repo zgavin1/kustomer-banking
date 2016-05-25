@@ -6,7 +6,7 @@ describe('account reducer', () => {
    it('should return the initial state', () => {
       expect(reducer(undefined, {}))
          .toEqual({
-            account: {balance: 0},
+            account: {balance: "0.00"},
             ledger: []
          });
    });
@@ -23,7 +23,8 @@ describe('account reducer', () => {
             amount: amount,
             balance: balance,
             id: id,
-            date: date
+            date: date,
+            type: C.DEPOSIT
          }
       };
 
@@ -35,7 +36,8 @@ describe('account reducer', () => {
                   amount: amount,
                   balance: balance,
                   id: id,
-                  date: date
+                  date: date,
+                  type: C.DEPOSIT
                }
             ]
          });
@@ -43,12 +45,13 @@ describe('account reducer', () => {
 
    it('can handle negatives', () => {
       const testWithdrawal = {
-         type: C.WITHDRAW,
+         type: C.WITHDRAWAL,
          transaction: {
             amount: 5,
             balance: -5,
             id: 10,
-            date: "Monday"
+            date: "Monday",
+            type: C.WITHDRAWAL
          }
       };
 
@@ -60,7 +63,8 @@ describe('account reducer', () => {
                   amount: 5,
                   balance: -5,
                   id: 10,
-                  date: "Monday"
+                  date: "Monday",
+                  type: C.WITHDRAWAL
                }
             ]
          });
