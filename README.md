@@ -20,3 +20,7 @@ table formatting. columns change size. I'm not super familiar with semantic, and
 Withdraw and Deposit buttons stay in a darkened "pressed" state after submission. This probably has to do with my calls to preventDefault to handle the restraints on characters allowed in the input.
 
 Instead of constraints, I could (and probably should) have some alerts on bad input (decimals, dashes, e, E).
+
+Filter buttons resize. Just ran out of time.
+
+Date could be formatted better. Could implement MomentJS for this easily.
