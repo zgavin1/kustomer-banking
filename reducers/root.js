@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import C from './../constants';
 
 const defaultBalance = {
-   balance: 0
+   balance: "0.00"
 }
 
 const account = (

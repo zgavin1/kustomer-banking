@@ -2,10 +2,10 @@ import C from './../constants';
 import utils from './../util/bankingUtils';
 
 export default {
-   deposit: (amount, prevBalance) => {
-      return utils.makeDeposit(amount, prevBalance);
+   deposit: (dollars, cents, prevBalance) => {
+      return utils.makeDeposit(dollars, cents, prevBalance);
    },
-   withdraw: (amount, prevBalance) => {
-      return utils.makeWithdrawal(amount, prevBalance);
+   withdraw: (dollars, cents, prevBalance) => {
+      return utils.makeWithdrawal(dollars, cents, prevBalance);
    }
 }
