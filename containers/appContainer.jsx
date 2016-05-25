@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Balance from './../components/balance';
 import Transactions from './../components/transactions';
 import Ledger from './../components/ledger';
+import Footer from './footerContainer';
 
 const myApp = () => {
    return (
@@ -15,6 +16,7 @@ const myApp = () => {
       <Balance />
       <Transactions />
       <Ledger />
+      <Footer />
     </div>
    );
 };

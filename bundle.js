@@ -21252,6 +21252,10 @@
 	
 	var _ledger2 = _interopRequireDefault(_ledger);
 	
+	var _footerContainer = __webpack_require__(190);
+	
+	var _footerContainer2 = _interopRequireDefault(_footerContainer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var myApp = function myApp() {
@@ -21269,7 +21273,8 @@
 	    ),
 	    _react2.default.createElement(_balance2.default, null),
 	    _react2.default.createElement(_transactions2.default, null),
-	    _react2.default.createElement(_ledger2.default, null)
+	    _react2.default.createElement(_ledger2.default, null),
+	    _react2.default.createElement(_footerContainer2.default, null)
 	  );
 	};
 	
@@ -21705,6 +21710,58 @@
 	   ledger: ledger,
 	   visibilityFilter: visibilityFilter
 	});
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	var _filter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./../components/filter\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _filter2 = _interopRequireDefault(_filter);
+	
+	var _constants = __webpack_require__(186);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'p',
+	    null,
+	    'Show:',
+	    "  ",
+	    _react2.default.createElement(
+	      _filter2.default,
+	      { filter: _constants2.default.SHOW_ALL },
+	      'All'
+	    ),
+	    "  ",
+	    _react2.default.createElement(
+	      _filter2.default,
+	      { filter: _constants2.default.SHOW_DEPOSITS },
+	      'Deposits'
+	    ),
+	    "  ",
+	    _react2.default.createElement(
+	      _filter2.default,
+	      { filter: _constants2.default.SHOW_WITHDRAWALS },
+	      'Withdrawals'
+	    )
+	  );
+	};
 
 /***/ }
 /******/ ]);
