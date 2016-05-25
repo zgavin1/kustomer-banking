@@ -60,7 +60,7 @@
 	
 	var _appContainer2 = _interopRequireDefault(_appContainer);
 	
-	var _root = __webpack_require__(189);
+	var _root = __webpack_require__(191);
 	
 	var _root2 = _interopRequireDefault(_root);
 	
@@ -21248,11 +21248,11 @@
 	
 	var _transactions2 = _interopRequireDefault(_transactions);
 	
-	var _ledger = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./../components/ledger\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _ledger = __webpack_require__(188);
 	
 	var _ledger2 = _interopRequireDefault(_ledger);
 	
-	var _footerContainer = __webpack_require__(190);
+	var _footerContainer = __webpack_require__(189);
 	
 	var _footerContainer2 = _interopRequireDefault(_footerContainer);
 	
@@ -21635,8 +21635,293 @@
 	exports.default = (0, _reactRedux.connect)()(Input);
 
 /***/ },
-/* 188 */,
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	var _constants = __webpack_require__(186);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	var _bankingUtils = __webpack_require__(185);
+	
+	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Ledger = _react2.default.createClass({
+	   displayName: 'Ledger',
+	
+	   formatLargeNumber: function formatLargeNumber(num) {
+	      return Math.abs(parseFloat(num)).toLocaleString("us", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
+	   },
+	
+	   formatRows: function formatRows() {
+	      var _this = this;
+	
+	      var rows = this.props.rows;
+	
+	      var ledgerRows = rows.map(function (row) {
+	         var typeClass = row.type === _constants2.default.WITHDRAWAL ? "deficit" : "surplus";
+	         var balanceClass = row.balance <= 0 ? "deficit" : "surplus";
+	
+	         var amount = _this.formatLargeNumber(row.amount);
+	         var balance = _this.formatLargeNumber(row.balance);
+	
+	         return _react2.default.createElement(
+	            'tr',
+	            { className: 'ledger-row', key: row.id },
+	            _react2.default.createElement(
+	               'td',
+	               { className: "ui right aligned " + typeClass },
+	               row.type
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: "ui right aligned " + typeClass },
+	               amount
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: "ui right aligned " + balanceClass },
+	               balance
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               row.date
+	            )
+	         );
+	      }).reverse();
+	
+	      if (rows.length === 0) {
+	         ledgerRows = _react2.default.createElement(
+	            'tr',
+	            { key: '0' },
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            )
+	         );
+	      }
+	      return ledgerRows;
+	   },
+	
+	   render: function render() {
+	      return _react2.default.createElement(
+	         'div',
+	         { className: 'ui container' },
+	         _react2.default.createElement(
+	            'table',
+	            { className: 'ui celled table' },
+	            _react2.default.createElement(
+	               'thead',
+	               null,
+	               _react2.default.createElement(
+	                  'tr',
+	                  null,
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Type'
+	                  ),
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Amount'
+	                  ),
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Balance'
+	                  ),
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Date'
+	                  )
+	               )
+	            ),
+	            _react2.default.createElement(
+	               'tbody',
+	               null,
+	               this.formatRows()
+	            ),
+	            _react2.default.createElement(
+	               'tfoot',
+	               null,
+	               _react2.default.createElement(
+	                  'tr',
+	                  null,
+	                  _react2.default.createElement('th', { colSpan: '4' })
+	               )
+	            )
+	         )
+	      );
+	   }
+	});
+	
+	var select = function select(state) {
+	   return {
+	      rows: _bankingUtils2.default.getVisibleRows(state.ledger, state.filter)
+	   };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(select)(Ledger);
+
+/***/ },
 /* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	var _filter = __webpack_require__(190);
+	
+	var _filter2 = _interopRequireDefault(_filter);
+	
+	var _constants = __webpack_require__(186);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'p',
+	    null,
+	    'Show:',
+	    "  ",
+	    _react2.default.createElement(
+	      _filter2.default,
+	      { filter: _constants2.default.SHOW_ALL },
+	      'All'
+	    ),
+	    "  ",
+	    _react2.default.createElement(
+	      _filter2.default,
+	      { filter: _constants2.default.SHOW_DEPOSITS },
+	      'Deposits'
+	    ),
+	    "  ",
+	    _react2.default.createElement(
+	      _filter2.default,
+	      { filter: _constants2.default.SHOW_WITHDRAWALS },
+	      'Withdrawals'
+	    )
+	  );
+	};
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(158);
+	
+	var _constants = __webpack_require__(186);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	var _bankingUtils = __webpack_require__(185);
+	
+	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Filter = function Filter(_ref) {
+	  var active = _ref.active;
+	  var children = _ref.children;
+	  var _onClick = _ref.onClick;
+	
+	  if (active) {
+	    return _react2.default.createElement(
+	      'span',
+	      null,
+	      ' ',
+	      children,
+	      ' '
+	    );
+	  }
+	
+	  return _react2.default.createElement(
+	    'button',
+	    {
+	      onClick: function onClick(e) {
+	        e.preventDefault();
+	        _onClick();
+	      }
+	    },
+	    children
+	  );
+	};
+	
+	var mapStateToLinkProps = function mapStateToLinkProps(state, ownProps) {
+	  return {
+	    active: ownProps.filter === state.visibilityFilter
+	  };
+	};
+	
+	var mapDispatchToLinkProps = function mapDispatchToLinkProps(dispatch, ownProps) {
+	  return {
+	    onClick: function onClick() {
+	      dispatch({
+	        type: "SET_VISIBILITY_FILTER",
+	        filter: ownProps.filter
+	      });
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToLinkProps, mapDispatchToLinkProps)(Filter);
+
+/***/ },
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21700,9 +21985,9 @@
 	   switch (action.type) {
 	      case 'SET_VISIBILITY_FILTER':
 	         return action.filter;
+	      default:
+	         return state;
 	   };
-	
-	   return state;
 	};
 	
 	exports.default = (0, _redux.combineReducers)({
@@ -21710,58 +21995,6 @@
 	   ledger: ledger,
 	   visibilityFilter: visibilityFilter
 	});
-
-/***/ },
-/* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(158);
-	
-	var _filter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./../components/filter\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _filter2 = _interopRequireDefault(_filter);
-	
-	var _constants = __webpack_require__(186);
-	
-	var _constants2 = _interopRequireDefault(_constants);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function () {
-	  return _react2.default.createElement(
-	    'p',
-	    null,
-	    'Show:',
-	    "  ",
-	    _react2.default.createElement(
-	      _filter2.default,
-	      { filter: _constants2.default.SHOW_ALL },
-	      'All'
-	    ),
-	    "  ",
-	    _react2.default.createElement(
-	      _filter2.default,
-	      { filter: _constants2.default.SHOW_DEPOSITS },
-	      'Deposits'
-	    ),
-	    "  ",
-	    _react2.default.createElement(
-	      _filter2.default,
-	      { filter: _constants2.default.SHOW_WITHDRAWALS },
-	      'Withdrawals'
-	    )
-	  );
-	};
 
 /***/ }
 /******/ ]);

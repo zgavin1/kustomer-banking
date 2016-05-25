@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import C from './../constants';
-import Utils from './util/bankingUtils';
+import Utils from './../util/bankingUtils';
 
 const Filter = ({
   active,
@@ -20,7 +20,7 @@ const Filter = ({
       }}
     >
       {children}
-    </a>
+    </button>
   );
 };
 
@@ -47,7 +47,8 @@ const mapDispatchToLinkProps = (
   };
 };
 
-const FilterLink = connect(
-  mapStateToLinkProps,
-  mapDispatchToLinkProps
-)(Link);
+export default connect(mapStateToLinkProps,mapDispatchToLinkProps)(Filter);
+
+
+
+

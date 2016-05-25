@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import C from './../constants';
-import Utils form './util/bankingUtils';
+import Utils from './../util/bankingUtils';
 
 
 const Ledger = React.createClass({
