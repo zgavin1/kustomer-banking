@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import C from './../constants';
-import Utils from './../util/bankingUtils';
+import actions from './../actions/actionCreators';
 
 const Filter = ({
   active,
@@ -34,20 +34,17 @@ const mapStateToLinkProps = (
 };
 
 const mapDispatchToLinkProps = (
-  dispatch,
-  ownProps
+   dispatch,
+   ownProps
 ) => {
    return {
       onClick: () => {
-         dispatch({
-            type: "SET_VISIBILITY_FILTER",
-            filter: ownProps.filter
-         });
+         dispatch(actions.setFilter(C.SET_VISIBILITY_FILTER, ownProps.filter))
       }
    };
 };
 
-export default connect(mapStateToLinkProps,mapDispatchToLinkProps)(Filter);
+export default connect(mapStateToLinkProps, mapDispatchToLinkProps)(Filter);
 
 
 

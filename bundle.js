@@ -21492,8 +21492,13 @@
 	   },
 	   withdraw: function withdraw(dollars, cents, prevBalance) {
 	      return _bankingUtils2.default.makeWithdrawal(dollars, cents, prevBalance);
+	   },
+	   setFilter: function setFilter(type, filter) {
+	      return {
+	         type: type,
+	         filter: filter
+	      };
 	   }
-	
 	};
 
 /***/ },
@@ -21873,9 +21878,9 @@
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _bankingUtils = __webpack_require__(185);
+	var _actionCreators = __webpack_require__(184);
 	
-	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
+	var _actionCreators2 = _interopRequireDefault(_actionCreators);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21915,10 +21920,7 @@
 	var mapDispatchToLinkProps = function mapDispatchToLinkProps(dispatch, ownProps) {
 	  return {
 	    onClick: function onClick() {
-	      dispatch({
-	        type: "SET_VISIBILITY_FILTER",
-	        filter: ownProps.filter
-	      });
+	      dispatch(_actionCreators2.default.setFilter(_constants2.default.SET_VISIBILITY_FILTER, ownProps.filter));
 	    }
 	  };
 	};
