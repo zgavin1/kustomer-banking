@@ -21475,7 +21475,7 @@
 	   value: true
 	});
 	
-	var _bankingUtils = __webpack_require__(186);
+	var _bankingUtils = __webpack_require__(185);
 	
 	var _bankingUtils2 = _interopRequireDefault(_bankingUtils);
 	
@@ -21492,20 +21492,6 @@
 
 /***/ },
 /* 185 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	   value: true
-	});
-	exports.default = {
-	   DEPOSIT: "DEPOSIT",
-	   WITHDRAWAL: "WITHDRAWAL"
-	};
-
-/***/ },
-/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21514,7 +21500,7 @@
 	   value: true
 	});
 	
-	var _constants = __webpack_require__(185);
+	var _constants = __webpack_require__(186);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -21572,6 +21558,20 @@
 	};
 	
 	exports.default = utils;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	exports.default = {
+	   DEPOSIT: "DEPOSIT",
+	   WITHDRAWAL: "WITHDRAWAL"
+	};
 
 /***/ },
 /* 187 */
@@ -21644,125 +21644,139 @@
 	
 	var _reactRedux = __webpack_require__(158);
 	
-	var _constants = __webpack_require__(185);
+	var _constants = __webpack_require__(186);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Ledger = function Ledger(_ref) {
-	   var rows = _ref.rows;
+	var Ledger = _react2.default.createClass({
+	   displayName: 'Ledger',
 	
-	   var ledgerRows = rows.map(function (row) {
-	      var typeClass = row.type === _constants2.default.WITHDRAWAL ? "deficit" : "surplus";
-	      var balanceClass = row.balance <= 0 ? "deficit" : "surplus";
-	      // debugger
+	   formatLargeNumber: function formatLargeNumber(num) {
+	      return Math.abs(parseFloat(num)).toLocaleString("us", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
+	   },
+	
+	   formatRows: function formatRows() {
+	      var _this = this;
+	
+	      var rows = this.props.rows;
+	
+	      var ledgerRows = rows.map(function (row) {
+	         var typeClass = row.type === _constants2.default.WITHDRAWAL ? "deficit" : "surplus";
+	         var balanceClass = row.balance <= 0 ? "deficit" : "surplus";
+	
+	         var amount = _this.formatLargeNumber(row.amount);
+	         var balance = _this.formatLargeNumber(row.balance);
+	
+	         return _react2.default.createElement(
+	            'tr',
+	            { className: 'ledger-row', key: row.id },
+	            _react2.default.createElement(
+	               'td',
+	               { className: "ui right aligned " + typeClass },
+	               row.type
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: "ui right aligned " + typeClass },
+	               amount
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: "ui right aligned " + balanceClass },
+	               balance
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               row.date
+	            )
+	         );
+	      }).reverse();
+	
+	      if (rows.length === 0) {
+	         ledgerRows = _react2.default.createElement(
+	            'tr',
+	            { key: '0' },
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            ),
+	            _react2.default.createElement(
+	               'td',
+	               { className: 'ui right aligned' },
+	               'None'
+	            )
+	         );
+	      }
+	      return ledgerRows;
+	   },
+	
+	   render: function render() {
 	      return _react2.default.createElement(
-	         'tr',
-	         { className: 'ledger-row', key: row.id },
+	         'div',
+	         { className: 'ui container' },
 	         _react2.default.createElement(
-	            'td',
-	            { className: "ui right aligned " + typeClass },
-	            row.type
-	         ),
-	         _react2.default.createElement(
-	            'td',
-	            { className: "ui right aligned " + typeClass },
-	            '$',
-	            row.amount
-	         ),
-	         _react2.default.createElement(
-	            'td',
-	            { className: "ui right aligned " + balanceClass },
-	            '$',
-	            row.balance
-	         ),
-	         _react2.default.createElement(
-	            'td',
-	            { className: 'ui right aligned' },
-	            row.date
-	         )
-	      );
-	   }).reverse();
-	
-	   if (rows.length === 0) {
-	      ledgerRows = _react2.default.createElement(
-	         'tr',
-	         { key: '0' },
-	         _react2.default.createElement(
-	            'td',
-	            { className: 'ui right aligned' },
-	            'None'
-	         ),
-	         _react2.default.createElement(
-	            'td',
-	            { className: 'ui right aligned' },
-	            'None'
-	         ),
-	         _react2.default.createElement(
-	            'td',
-	            { className: 'ui right aligned' },
-	            'None'
-	         ),
-	         _react2.default.createElement(
-	            'td',
-	            { className: 'ui right aligned' },
-	            'None'
+	            'table',
+	            { className: 'ui celled table' },
+	            _react2.default.createElement(
+	               'thead',
+	               null,
+	               _react2.default.createElement(
+	                  'tr',
+	                  null,
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Type'
+	                  ),
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Amount'
+	                  ),
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Balance'
+	                  ),
+	                  _react2.default.createElement(
+	                     'th',
+	                     { className: 'ui right aligned' },
+	                     'Date'
+	                  )
+	               )
+	            ),
+	            _react2.default.createElement(
+	               'tbody',
+	               null,
+	               this.formatRows()
+	            ),
+	            _react2.default.createElement(
+	               'tfoot',
+	               null,
+	               _react2.default.createElement(
+	                  'tr',
+	                  null,
+	                  _react2.default.createElement('th', { colSpan: '4' })
+	               )
+	            )
 	         )
 	      );
 	   }
-	
-	   return _react2.default.createElement(
-	      'div',
-	      { className: 'ui container' },
-	      _react2.default.createElement(
-	         'table',
-	         { className: 'ui celled table' },
-	         _react2.default.createElement(
-	            'thead',
-	            null,
-	            _react2.default.createElement(
-	               'tr',
-	               null,
-	               _react2.default.createElement(
-	                  'th',
-	                  { className: 'ui right aligned' },
-	                  'Type'
-	               ),
-	               _react2.default.createElement(
-	                  'th',
-	                  { className: 'ui right aligned' },
-	                  'Amount'
-	               ),
-	               _react2.default.createElement(
-	                  'th',
-	                  { className: 'ui right aligned' },
-	                  'Balance'
-	               ),
-	               _react2.default.createElement(
-	                  'th',
-	                  { className: 'ui right aligned' },
-	                  'Date'
-	               )
-	            )
-	         ),
-	         _react2.default.createElement(
-	            'tbody',
-	            null,
-	            ledgerRows
-	         ),
-	         _react2.default.createElement(
-	            'tfoot',
-	            null,
-	            _react2.default.createElement(
-	               'tr',
-	               null,
-	               _react2.default.createElement('th', { colSpan: '4' })
-	            )
-	         )
-	      )
-	   );
-	};
+	});
 	
 	var select = function select(state) {
 	   return {
@@ -21786,7 +21800,7 @@
 	
 	var _redux = __webpack_require__(165);
 	
-	var _constants = __webpack_require__(185);
+	var _constants = __webpack_require__(186);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
