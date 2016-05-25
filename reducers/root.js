@@ -45,7 +45,7 @@ const ledger = (
    }
 }
 
-const visibilityFilter = (
+const filter = (
   state = "SHOW_ALL",
   action
 ) => {
@@ -61,5 +61,5 @@ const visibilityFilter = (
 export default combineReducers({
    account,
    ledger,
-   visibilityFilter
+   filter
 });

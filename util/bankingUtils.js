@@ -10,13 +10,13 @@ const utils = {
          case "SHOW_WITHDRAWALS":
             return rows.filter(
                (r) => {
-                  r.type === C.WITHDRAWAL;
+                  return r.type === C.WITHDRAWAL;
                }
             );
          case "SHOW_DEPOSITS":
             return rows.filter(
                (r) => {
-                  r.type === C.DEPOSIT;
+                  return r.type === C.DEPOSIT;
                }
             );
          default:

@@ -21521,11 +21521,11 @@
 	            return rows;
 	         case "SHOW_WITHDRAWALS":
 	            return rows.filter(function (r) {
-	               r.type === _constants2.default.WITHDRAWAL;
+	               return r.type === _constants2.default.WITHDRAWAL;
 	            });
 	         case "SHOW_DEPOSITS":
 	            return rows.filter(function (r) {
-	               r.type === _constants2.default.DEPOSIT;
+	               return r.type === _constants2.default.DEPOSIT;
 	            });
 	         default:
 	            return rows;
@@ -21576,7 +21576,12 @@
 	});
 	exports.default = {
 	   DEPOSIT: "DEPOSIT",
-	   WITHDRAWAL: "WITHDRAWAL"
+	   WITHDRAWAL: "WITHDRAWAL",
+	
+	   SET_VISIBILITY_FILTER: "SET_VISIBILITY_FILTER",
+	   SHOW_ALL: "SHOW_ALL",
+	   SHOW_DEPOSITS: "SHOW_DEPOSITS",
+	   SHOW_WITHDRAWALS: "SHOW_WITHDRAWALS"
 	};
 
 /***/ },
@@ -21903,7 +21908,7 @@
 	
 	var mapStateToLinkProps = function mapStateToLinkProps(state, ownProps) {
 	  return {
-	    active: ownProps.filter === state.visibilityFilter
+	    active: ownProps.filter === state.filter
 	  };
 	};
 	
@@ -21978,7 +21983,7 @@
 	   }
 	};
 	
-	var visibilityFilter = function visibilityFilter() {
+	var filter = function filter() {
 	   var state = arguments.length <= 0 || arguments[0] === undefined ? "SHOW_ALL" : arguments[0];
 	   var action = arguments[1];
 	
@@ -21993,7 +21998,7 @@
 	exports.default = (0, _redux.combineReducers)({
 	   account: account,
 	   ledger: ledger,
-	   visibilityFilter: visibilityFilter
+	   filter: filter
 	});
 
 /***/ }
